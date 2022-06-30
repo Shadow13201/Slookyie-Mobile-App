@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fluttermax">
+    package="com.example.slookyie_max">
    <application
-        android:label="fluttermax"
+        android:label="slookyie_max"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
