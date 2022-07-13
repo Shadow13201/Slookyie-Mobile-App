@@ -8,6 +8,7 @@ var useragent = require('express-useragent');
 var path = require('path');
 
 //route intialisation
+const userRoute=require('./routes/userRoute');
 
 var app=express();
 app.use(cors());
@@ -68,6 +69,7 @@ app.get('/wp/:id', (req, res) => {
 });
 
 //app.use
+app.use(userRoute)
 
 
 app.get('/health', async (req, res) => {
