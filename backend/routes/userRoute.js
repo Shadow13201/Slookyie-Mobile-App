@@ -1,7 +1,8 @@
 const router=require("express").Router()
 const userModel=require('../models/userModel');
 const tokenModel=require('../models/tokenModel');
-var bcrypt=require('bcryptjs');
+const userAuth=require('../middleware/userAuth')
+var bcrypt=require('bcryptj');
 var jwt = require('jsonwebtoken');
 
 //user registration
