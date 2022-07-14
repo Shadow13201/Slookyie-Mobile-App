@@ -185,4 +185,6 @@ router.get('/logout/user',userAuth,async(req,res)=>{
     }
 })
 
+
+
 module.exports = router;
