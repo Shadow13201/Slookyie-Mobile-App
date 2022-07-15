@@ -29,7 +29,8 @@ const userModelSchema = new mongoose.Schema({
         default:'User' 
     }, //Admin
     status: {
-        type: String, 
+        type:String,
+        default:"Active"
     }
 });
 

@@ -8,7 +8,7 @@ var useragent = require('express-useragent');
 var path = require('path');
 
 //route intialisation
-const userRoute=require('./routes/userRoute');
+const userRoute=require('../backend/routes/userRoute');
 
 var app=express();
 app.use(cors());
