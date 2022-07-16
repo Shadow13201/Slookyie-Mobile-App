@@ -1,6 +1,7 @@
 const router=require("express").Router()
 const userModel=require('../models/userModel');
 const tokenModel=require('../models/tokenModel');
+const userAuth=require('../middleware/userAuth')
 var bcrypt=require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
@@ -57,9 +58,10 @@ router.post('/reg/user',async(req,res)=>{
         email:email,
         phonenumber:phonenumber,
         city:city,
-        district:district,
+        gender:gender,
         password:encryptedPassword,
-        role:'user'
+        role:'user',
+        status:'Active'
       })
       await data.save()
       var token = jwt.sign({
@@ -75,7 +77,8 @@ router.post('/reg/user',async(req,res)=>{
       res.status(200).json({
           status:true,
           msg:"success",
-          token:token
+          token:token,
+          data:data
       })
       return;
 
@@ -111,7 +114,7 @@ router.post('/login/user',async(req,res)=>{
             })
             return
         }
-        var data=await userModel.findOne({email:email});
+        var data=await userModel.findOne({email:email,status:"Active"});
         if(!data){
             res.status(200).json({
                 status:false,
@@ -158,31 +161,33 @@ router.post('/login/user',async(req,res)=>{
 })
 
 //user logout
-router.get('/logout/user',userAuth,async(req,res)=>{
-    try{
-        var id=req.user.id
-        if(id==null || id==undefined){
-            res.status(200).json({
-                status:false,
-                msg:"id not  provided"
-            })
-            return;
-        }
-       await tokenModel.deleteOne({tokenId:id})
-        res.status(200).json({
-            status:true,
-            msg:"Logged out"
-        });
-        return;
-    }
-    catch(er){
-        console.log(er)
-        res.status(500).json({
-            satus:false,
-            msg:"Internal server error"
-        })
-        return; 
-    }
-})
+// router.get('/logout/user',userAuth,async(req,res)=>{
+//     try{
+//         var id=req.user.id;
+//         if(id==null || id==undefined){
+//             res.status(200).json({
+//                 status:false,
+//                 msg:"id not  provided"
+//             })
+//             return;
+//         }
+//        await tokenModel.deleteOne({tokenId:id})
+//         res.status(200).json({
+//             status:true,
+//             msg:"Logged out"
+//         });
+//         return;
+//     }
+//     catch(er){
+//         console.log(er)
+//         res.status(500).json({
+//             satus:false,
+//             msg:"Internal server error"
+//         })
+//         return; 
+//     }
+// })
+
+
 
 module.exports = router;
