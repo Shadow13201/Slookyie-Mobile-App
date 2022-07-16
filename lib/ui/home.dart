@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:slookyie_max/ui/services.dart';
 import 'package:slookyie_max/ui/staffselect.dart';
+
+import 'profile.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -12,7 +15,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xffFF0063),
         title: Text("Home",style: TextStyle(color: Colors.black),),
       ),
       backgroundColor: Colors.greenAccent,
@@ -28,7 +31,7 @@ class _HomeState extends State<Home> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height/5,
                   child: InkWell(
-                    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder:(context)=>StaffSelect())),
+                    onTap: ()=>Navigator.push(context, MaterialPageRoute(builder:(context)=>Services())),
                     child: Card(
                       color: Colors.purple,
                       child: Stack(
@@ -68,7 +71,18 @@ class _HomeState extends State<Home> {
             children: [
               Icon(Icons.account_circle_sharp),
               Spacer(),
-              Icon(Icons.account_circle_sharp)
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Profile()));
+                },
+                child: CircleAvatar(
+                    child:Icon(Icons.account_circle_sharp)
+                ),
+              ),
+
             ],
           ),
         ),

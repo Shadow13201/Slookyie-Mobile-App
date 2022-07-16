@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slookyie_max/ui/home.dart';
+import 'package:slookyie_max/ui/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: const Login(),
     );
   }
 }

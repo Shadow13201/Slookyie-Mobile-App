@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:slookyie_max/ui/home.dart';
+import 'package:slookyie_max/ui/signUp.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -12,21 +13,20 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffD9D9D9),
-        body: SingleChildScrollView(
-          child: Container(
-           height: MediaQuery.of(context).size.height,
-           width: MediaQuery.of(context).size.width,
-            // alignment: Alignment(0.0, 2.5),
-            // child: CircleAvatar(
-            //   backgroundColor: Color(0xff6998AB),
-            //   // child: Icon(
-            //   //   Icons.person,
-            //   //   size: 80,
-            //   // ),
-            //   backgroundImage: AssetImage("assets/icon.png"),
-            //   radius: 70.0,
-            // ),
+      backgroundColor: Color(0xffFF0063),
+        body: Container(
+         height: MediaQuery.of(context).size.height,
+         width: MediaQuery.of(context).size.width,
+          // alignment: Alignment(0.0, 2.5),
+          // child: CircleAvatar(
+          //   backgroundColor: Color(0xff6998AB),
+          //   // child: Icon(
+          //   //   Icons.person,
+          //   //   size: 80,
+          //   // ),
+          //   backgroundImage: AssetImage("assets/icon.png"),
+          //   radius: 70.0,
+          // ),
      //       decoration: new BoxDecoration(
      //              image: new DecorationImage(
      //              image: ExactAssetImage('assets/icon.png',),
@@ -34,9 +34,10 @@ class _LoginState extends State<Login> {
      //            ),
      // ),
 
+          child: SingleChildScrollView(
             child: Column(
               children: [
-              SizedBox(height: 250),
+              SizedBox(height: 160),
                 Text(
                   'SLOOKYIE ' ,
                   textAlign: TextAlign.center,
@@ -55,14 +56,14 @@ class _LoginState extends State<Login> {
                   ),
                 ),
 
-          SizedBox(height: 160),
-          Text(
+        SizedBox(height: 120),
+        Text(
             'Please login to Continue',
             textAlign: TextAlign.center,
             style: TextStyle(
                 color: Colors.white, fontSize: 18, fontFamily: "fontStyle"),
-          ),
-          Row(
+        ),
+        Row(
             children: [
               SizedBox(
                 width: 60,
@@ -75,8 +76,8 @@ class _LoginState extends State<Login> {
                     color: Colors.white, fontSize: 9, fontFamily: "fontS"),
               ),
             ],
-          ),
-          Container(
+        ),
+        Container(
             width: 290,
             height: 44,
             child: TextField(
@@ -100,11 +101,11 @@ class _LoginState extends State<Login> {
 
               ),
             ),
-          ),
-          SizedBox(
+        ),
+        SizedBox(
             height: 10,
-          ),
-          Row(
+        ),
+        Row(
             children: [
               SizedBox(
                 width: 60,
@@ -116,7 +117,7 @@ class _LoginState extends State<Login> {
                     color: Colors.white, fontSize: 9, fontFamily: "fontS"),
               ),
             ],
-          ),
+        ),
                 Container(
                   width: 290,
                   height: 44,
@@ -146,22 +147,48 @@ class _LoginState extends State<Login> {
                 ),
 
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                   Container(
                   width: 290,
     height: 44,
     child: MaterialButton(
+        color: Colors.white,
+      height: 10,
+      minWidth: MediaQuery.of(context).size.width*.36,
+      // minWidth:MediaQuery.of(context).size.height*.36,
     onPressed: () {
       Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
     },
-      child: Text("Login",style: TextStyle(color: Colors.white),),
+      child: Text("Login",style: TextStyle(color: Color(0XFFff0063)),),
     ),),
+            SizedBox(
+              height: 20,
+            ),
+                Text("Don't have an account ?",style: TextStyle(color: Colors.white,),),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 290,
+                  height: 44,
+                  child: MaterialButton(
+                    color: Color(0xffFFFFFF),
+                    height: 10,
+                    minWidth: MediaQuery.of(context).size.width*.36,
+                    // minWidth:MediaQuery.of(context).size.height*.36,
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUP()));
+                    },
+                    child: Text("Sign Up",style: TextStyle(color: Color(0XFFff0063),),
+                  ),),
 
-              ]),
+                ),
+
+              ]
+          ),)
           ),
 
-        ),
     );
   }
 }
