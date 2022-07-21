@@ -6,6 +6,10 @@ const serviceModelScheme=new mongoose.schema
 ({
     serviceId:{
         type:String
-    }
+    },
     
+    service:{
+        type:String
+    }
 })
+module.exports = mongoose.model("serviceModel", serviceModelSchema);
