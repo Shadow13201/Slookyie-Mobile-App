@@ -189,5 +189,7 @@ router.get('/logout/user',userAuth,async(req,res)=>{
 })
 
 
+//////////////////////////// ADMIN //////////////////////////////////
+
 
 module.exports = router;
