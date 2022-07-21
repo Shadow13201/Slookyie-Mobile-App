@@ -161,32 +161,32 @@ router.post('/login/user',async(req,res)=>{
 })
 
 //user logout
-// router.get('/logout/user',userAuth,async(req,res)=>{
-//     try{
-//         var id=req.user.id;
-//         if(id==null || id==undefined){
-//             res.status(200).json({
-//                 status:false,
-//                 msg:"id not  provided"
-//             })
-//             return;
-//         }
-//        await tokenModel.deleteOne({tokenId:id})
-//         res.status(200).json({
-//             status:true,
-//             msg:"Logged out"
-//         });
-//         return;
-//     }
-//     catch(er){
-//         console.log(er)
-//         res.status(500).json({
-//             satus:false,
-//             msg:"Internal server error"
-//         })
-//         return; 
-//     }
-// })
+router.get('/logout/user',userAuth,async(req,res)=>{
+    try{
+        var id=req.user.id;
+        if(id==null || id==undefined){
+            res.status(200).json({
+                status:false,
+                msg:"id not  provided"
+            })
+            return;
+        }
+       await tokenModel.deleteOne({tokenId:id})
+        res.status(200).json({
+            status:true,
+            msg:"Logged out"
+        });
+        return;
+    }
+    catch(er){
+        console.log(er)
+        res.status(500).json({
+            satus:false,
+            msg:"Internal server error"
+        })
+        return; 
+    }
+})
 
 
 
