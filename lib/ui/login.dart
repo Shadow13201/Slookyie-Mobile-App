@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slookyie_max/ui/adminhome.dart';
 import 'package:slookyie_max/ui/home.dart';
-import 'package:slookyie_max/ui/signUp.dart';
+import 'package:slookyie_max/ui/registration.dart';
 import '../bloc/loginbloc.dart';
 import '../helper/sharedpreferences.dart';
 import '../loadingscreen.dart';
