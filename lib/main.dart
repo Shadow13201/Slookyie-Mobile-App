@@ -32,6 +32,7 @@ class _AppHomeState extends State<AppHome> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<LogBloc>(create: (context) => LogBloc()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -83,7 +84,6 @@ class _NewHomeState extends State<NewHome> {
       body: BlocListener<LogBloc,LogState>(
         listener: (context,state){
           if(state is AuthConfirmed){
-
             if (state.role == "User") {
               Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                   Home()), (Route<dynamic> route) => false);

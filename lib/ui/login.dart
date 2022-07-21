@@ -199,11 +199,11 @@ class _LoginState extends State<Login> {
                     listener: (context, state) {
                       if (state is OtpChecked) {
                         Navigator.pop(context);
-                        if(state.role == 'User'){
+                        if(state.role == 'user'){
                           {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                               Home()), (Route<dynamic> route) => false);}}
                         }
-                        else if(state.role =='Admin'){
+                        else if(state.role =='admin'){
                           {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                               AdminHome()), (Route<dynamic> route) => false);}}
                         }
