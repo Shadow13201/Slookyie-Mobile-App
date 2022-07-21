@@ -1,18 +1,21 @@
 class LoginModel {
   LoginModel({
-      this.status, 
-      this.msg, 
-      this.user, 
+      this.status,
+      this.msg,
+      this.role,
+      this.user,
       this.token,});
 
   LoginModel.fromJson(dynamic json) {
     status = json['status'];
     msg = json['msg'];
+    role=json['role'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     token = json['token'];
   }
   bool? status;
   String? msg;
+  String? role;
   User? user;
   String? token;
 
@@ -31,19 +34,20 @@ class LoginModel {
 
 class User {
   User({
-      this.id, 
-      this.name, 
-      this.email, 
-      this.phonenumber, 
-      this.gender, 
-      this.city, 
-      this.password, 
-      this.role, 
-      this.status, 
+      this.id,
+      this.role,
+      this.name,
+      this.email,
+      this.phonenumber,
+      this.gender,
+      this.city,
+      this.password,
+      this.status,
       this.v,});
 
   User.fromJson(dynamic json) {
     id = json['_id'];
+    role = json['role'];
     name = json['name'];
     email = json['email'];
     phonenumber = json['phonenumber'];

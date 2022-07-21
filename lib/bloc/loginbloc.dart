@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../data/models/LoginModel.dart';
 import '../data/repository.dart';
 import '../helper/sharedpreferences.dart';
 
