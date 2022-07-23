@@ -22,13 +22,15 @@ router.post('/addService/admin',adminAuth,async(req,res)=>{
         }
 
         var d= new serviceModel({
-            service:service
+            service:service,
+            role:'service'
         })
         await d.save()
 
         res.status(200).json({
             status:true,
-            msg:'Service Added'
+            msg:'Service Added',
+            data:d
         })
         return;
     } 
@@ -43,14 +45,62 @@ router.post('/addService/admin',adminAuth,async(req,res)=>{
     }
 })
 
+//delete sevicce
+router.post('/deleteServices/admin',adminAuth,async(req,res)=>{
+    try 
+    {
+    var {id}=req.body;
+    if(id==null || id==undefined){
+        res.status(200).json({
+            status:false,
+            msg:"id not  provided"
+        })
+        return;
+    }
+    var data=await serviceModel.deleteOne({serviceId:id})
+
+        res.status(200).json({
+            status:true,
+            msg:"Service deleted",
+            data:data
+        })
+        return;
+
+    } 
+    catch (error) 
+    {
+        console.log(error);
+        res.status(500).json({
+         status:false,
+         msg:'Internal Server Error'
+        }) 
+        return;  
+    }
+})
+
 //View all Services
 router.get('/view/services',async(req,res)=>{
     try 
     {
-        var {id}=req.user.id
+        var data=await serviceModel.find({role:'service'})
+
+        res.status(200).json({
+            status:true,
+            msg:"Services Viewed",
+            data:data
+        })
+        return;
     } 
     catch (err) 
     {
-        
+        console.log(err);
+        res.status(500).json({
+         status:false,
+         msg:'Internal Server Error'
+        }) 
+        return; 
     }
 })
+
+
+module.exports=router;
