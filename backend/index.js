@@ -9,8 +9,8 @@ var path = require('path');
 
 //route intialisation
 const userRoute=require('../backend/routes/userRoute');
-const serviceRoute=require('../backend/routes/serviceRoute')
-
+const serviceRoute=require('../backend/routes/serviceRoute');
+const bookingRoute=require('../backend/routes/bookingRoute');
 var app=express();
 app.use(cors());
 app.use(helmet());
@@ -72,7 +72,7 @@ app.get('/wp/:id', (req, res) => {
 //app.use
 app.use(userRoute)
 app.use(serviceRoute)
-
+app.use(bookingRoute)
 
 app.get('/health', async (req, res) => {
     res.send({
