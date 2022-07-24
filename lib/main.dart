@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slookyie_max/ui/adminhome.dart';
-import 'package:slookyie_max/ui/home.dart';
+import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/login.dart';
 import 'bloc/loginbloc.dart';
+import 'bloc/regBloc.dart';
+import 'bloc/viewServicesBloc.dart';
 import 'helper/sharedpreferences.dart';
 
 void main() => runApp(const AppHome());
@@ -28,6 +30,8 @@ class _AppHomeState extends State<AppHome> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<RegBloc>(create: (context) => RegBloc()),
+        BlocProvider<ViewServicesBloc>(create: (context) => ViewServicesBloc()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -35,7 +39,7 @@ class _AppHomeState extends State<AppHome> {
           theme: ThemeData(
             primarySwatch: Colors.purple,
           ),
-          home: Login()),
+          home: Services()),
     );
   }
 }

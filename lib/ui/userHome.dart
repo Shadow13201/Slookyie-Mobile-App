@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:slookyie_max/ui/services.dart';
+
+import 'homeServices.dart';
+
 
 class UserHome extends StatefulWidget {
   const UserHome({Key? key}) : super(key: key);

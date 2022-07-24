@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:slookyie_max/ui/home.dart';
+import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/registration.dart';
+// import 'package:slookyie_max/ui/signUp.dart';
 import '../bloc/loginbloc.dart';
 import '../helper/sharedpreferences.dart';
 import 'package:flutter/src/widgets/navigator.dart';
-
-import 'adminhome.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -102,16 +101,16 @@ class _LoginState extends State<Login> {
                     //suffixIcon: Image.asset("assets/tick.png"),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.white, width: 2.0),
+                      const BorderSide(color: Colors.white, width: 2.0),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(5.0)),
+                      const BorderRadius.all(Radius.circular(5.0)),
                       gapPadding: 4.0,
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.white, width: 2.0),
+                      const BorderSide(color: Colors.white, width: 2.0),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(5.0)),
+                      const BorderRadius.all(Radius.circular(5.0)),
                       gapPadding: 4.0,
                     ),
                   ),
@@ -153,16 +152,16 @@ class _LoginState extends State<Login> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.white, width: 2.0),
+                      const BorderSide(color: Colors.white, width: 2.0),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(5.0)),
+                      const BorderRadius.all(Radius.circular(5.0)),
                       gapPadding: 4.0,
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide:
-                          const BorderSide(color: Colors.white, width: 2.0),
+                      const BorderSide(color: Colors.white, width: 2.0),
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(5.0)),
+                      const BorderRadius.all(Radius.circular(5.0)),
                       gapPadding: 4.0,
                     ),
                     // hintText: 'USERNAME',
@@ -189,38 +188,11 @@ class _LoginState extends State<Login> {
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: (context) => Home()));
                   },
-
-                  child: BlocConsumer<AuthBloc, AuthState>(
-                    builder: (context, state) {
-
-                      return Text(
-                        "Log in",
-                        style: TextStyle(fontSize: 14,color: Color(0XFFff0063),),
-                      );
-
-                    },
-                    listener: (context, state) {
-                      if (state is OtpChecked) {
-                        Navigator.pop(context);
-                        if(state.role == 'user'){
-                          {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              Home()), (Route<dynamic> route) => false);}}
-                        }
-                        else if(state.role =='admin'){
-                          {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              AdminHome()), (Route<dynamic> route) => false);}}
-                        }
-                      } else if (state is OtpError) {
-                        Navigator.pop(context);
-                        Fluttertoast.showToast(
-                          msg: state.error,
-
                   child:BlocConsumer<AuthBloc,AuthState>(
                     builder: (context,state){
                       if(state is CheckingOtp){
                         return CircularProgressIndicator(
                           color: Colors.black,
-
                         );
                       }
                       else{
@@ -230,7 +202,7 @@ class _LoginState extends State<Login> {
                     listener: (context,state){
                       if(state is OtpChecked){
                         Fluttertoast.showToast(msg: "Login successfull");
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Home()), (Route<dynamic> route) => false);
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Services()), (Route<dynamic> route) => false);
                       }
                       else if(state is OtpError){
                         Fluttertoast.showToast(msg: state.error);
@@ -271,8 +243,8 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-            ),),
-          ])),
-    ),);
+            ]),
+          )),
+    );
   }
 }
