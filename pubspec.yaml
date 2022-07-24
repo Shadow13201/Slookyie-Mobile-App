@@ -47,6 +47,7 @@ dependencies:
 
 
   avatar_view: ^1.0.1
+  syncfusion_flutter_datepicker: ^20.2.39
 
 
 dev_dependencies:
