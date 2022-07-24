@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slookyie_max/ui/adminhome.dart';
 import 'package:slookyie_max/ui/services.dart';
 import 'package:slookyie_max/ui/staffselect.dart';
 
@@ -90,7 +91,13 @@ class _HomeState extends State<Home> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        onPressed: (){},
+        onPressed: (){
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AdminHome()));
+
+        },
         child: Icon(Icons.add,color: Colors.purple,),
       ),
     );

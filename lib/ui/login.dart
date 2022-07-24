@@ -192,7 +192,7 @@ class _LoginState extends State<Login> {
 
                       return Text(
                         "Log in",
-                        style: TextStyle(fontSize: 14),
+                        style: TextStyle(fontSize: 14,color: Color(0XFFff0063),),
                       );
 
                     },

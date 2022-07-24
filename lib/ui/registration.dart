@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/login.dart';
 import 'package:slookyie_max/ui/userHome.dart';
 
@@ -254,48 +255,48 @@ class _SignUPState extends State<SignUP> {
             SizedBox(
               height: 20,
             ),
-            Row(
-                children: [
-                  SizedBox(
-                    width: 60,
-                    height: 20,
-                  ),
-                  Container(
-                      height: 100,
-                      child: Row(children: [
-                        Text(
-                          "Gender:",
-                          style: TextStyle(color: Colors.black, fontSize: 15),
-                        ),
-                        Row(children: [
-                          Radio<SingingCharacter>(
-                            activeColor: Color(0xffff0063),
-                            value: SingingCharacter.Male,
-                            groupValue: _character,
-                            onChanged: (SingingCharacter? value) {
-                              gender = "Male";
-                              // setState(() {
-                              //   _character = value;
-                              // });
-                            },
-                          ),
-                          Text('Male'),
-                        ]),
-                        Row(children: [
-                          Radio<SingingCharacter>(
-                            activeColor: Color(0xffff0063),
-                            value: SingingCharacter.Female,
-                            groupValue: _character,
-                            onChanged: (SingingCharacter? value) {
-                              gender = "Female";
-                              // setState(() {
-                              //   _character = value;
-                              // });
-                            },
-                          ),
-                          Text('Female'),
-                        ])
-                      ])),
+            // Row(
+            //     children: [
+            //       SizedBox(
+            //         width: 60,
+            //         height: 20,
+            //       ),
+                  // Container(
+                  //     height: 100,
+                  //     child: Row(children: [
+                  //       Text(
+                  //         "Gender:",
+                  //         style: TextStyle(color: Colors.black, fontSize: 15),
+                  //       ),
+                  //       Row(children: [
+                  //         Radio<SingingCharacter>(
+                  //           activeColor: Color(0xffff0063),
+                  //           value: SingingCharacter.Male,
+                  //           groupValue: _character,
+                  //           onChanged: (SingingCharacter? value) {
+                  //             gender = "Male";
+                  //             // setState(() {
+                  //             //   _character = value;
+                  //             // });
+                  //           },
+                  //         ),
+                  //         Text('Male'),
+                  //       ]),
+                  //       Row(children: [
+                  //         Radio<SingingCharacter>(
+                  //           activeColor: Color(0xffff0063),
+                  //           value: SingingCharacter.Female,
+                  //           groupValue: _character,
+                  //           onChanged: (SingingCharacter? value) {
+                  //             gender = "Female";
+                  //             // setState(() {
+                  //             //   _character = value;
+                  //             // });
+                  //           },
+                  //         ),
+                  //         Text('Female'),
+                  //       ])
+                  //     ])),
 
 
             SizedBox(
@@ -319,7 +320,7 @@ class _SignUPState extends State<SignUP> {
               ),
                 ),
              ] ),
-           ] ),
-      ),);
+            ),
+      );
   }
 }
