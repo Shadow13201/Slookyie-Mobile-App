@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +30,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await TempStorage.addRole(loginModel.role.toString());
 
 
-      emit(OtpChecked(role:loginModel.role!));
+      emit(OtpChecked(role:loginModel.user!.role!));
     } else {
       emit(OtpError(error: loginModel.msg.toString()));
     }

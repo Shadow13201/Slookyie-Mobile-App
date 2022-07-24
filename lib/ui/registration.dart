@@ -27,12 +27,12 @@ class _SignUPState extends State<SignUP> {
       body: SingleChildScrollView(
         child:Column(
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 80),
             Text(
               'Sign Up', textAlign: TextAlign.center, style: TextStyle(fontSize: 30, color: Colors.white,fontFamily: "fontStyle"),
             ),
             SizedBox(
-              height: 50,
+              height: 30,
             ),
             Row(
               children: [
@@ -75,7 +75,7 @@ class _SignUPState extends State<SignUP> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
 
             Row (
@@ -119,7 +119,7 @@ class _SignUPState extends State<SignUP> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             Row (
               children: [
@@ -162,7 +162,7 @@ class _SignUPState extends State<SignUP> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
 
             Row(
@@ -207,7 +207,7 @@ class _SignUPState extends State<SignUP> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
 
 
@@ -253,7 +253,7 @@ class _SignUPState extends State<SignUP> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             // Row(
             //     children: [
@@ -261,42 +261,42 @@ class _SignUPState extends State<SignUP> {
             //         width: 60,
             //         height: 20,
             //       ),
-                  // Container(
-                  //     height: 100,
-                  //     child: Row(children: [
-                  //       Text(
-                  //         "Gender:",
-                  //         style: TextStyle(color: Colors.black, fontSize: 15),
-                  //       ),
-                  //       Row(children: [
-                  //         Radio<SingingCharacter>(
-                  //           activeColor: Color(0xffff0063),
-                  //           value: SingingCharacter.Male,
-                  //           groupValue: _character,
-                  //           onChanged: (SingingCharacter? value) {
-                  //             gender = "Male";
-                  //             // setState(() {
-                  //             //   _character = value;
-                  //             // });
-                  //           },
-                  //         ),
-                  //         Text('Male'),
-                  //       ]),
-                  //       Row(children: [
-                  //         Radio<SingingCharacter>(
-                  //           activeColor: Color(0xffff0063),
-                  //           value: SingingCharacter.Female,
-                  //           groupValue: _character,
-                  //           onChanged: (SingingCharacter? value) {
-                  //             gender = "Female";
-                  //             // setState(() {
-                  //             //   _character = value;
-                  //             // });
-                  //           },
-                  //         ),
-                  //         Text('Female'),
-                  //       ])
-                  //     ])),
+                  Container(
+                      height: 80,
+                      child: Row(children: [
+                        Text(
+                          "Gender:",
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                        Row(children: [
+                          Radio<SingingCharacter>(
+                            activeColor: Color(0xffff0063),
+                            value: SingingCharacter.Male,
+                            groupValue: _character,
+                            onChanged: (SingingCharacter? value) {
+                              gender = "Male";
+                              // setState(() {
+                              //   _character = value;
+                              // });
+                            },
+                          ),
+                          Text('Male'),
+                        ]),
+                        Row(children: [
+                          Radio<SingingCharacter>(
+                            activeColor: Color(0xffff0063),
+                            value: SingingCharacter.Female,
+                            groupValue: _character,
+                            onChanged: (SingingCharacter? value) {
+                              gender = "Female";
+                              // setState(() {
+                              //   _character = value;
+                              // });
+                            },
+                          ),
+                          Text('Female'),
+                        ])
+                      ])),
 
 
             SizedBox(

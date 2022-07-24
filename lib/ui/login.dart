@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:slookyie_max/ui/adminhome.dart';
 import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/registration.dart';
 import '../bloc/loginbloc.dart';
 import '../helper/sharedpreferences.dart';
-import '../loadingscreen.dart';
+import 'package:flutter/src/widgets/navigator.dart';
+
+import 'adminhome.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -140,16 +141,16 @@ class _LoginState extends State<Login> {
                   obscureText: _isObscure,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isObscure ? Icons.visibility : Icons.visibility_off,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isObscure = !_isObscure;
-                          });
-                        },
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isObscure ? Icons.visibility : Icons.visibility_off,
                       ),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
                     focusedBorder: OutlineInputBorder(
                       borderSide:
                           const BorderSide(color: Colors.white, width: 2.0),
@@ -183,10 +184,12 @@ class _LoginState extends State<Login> {
                   onPressed: () {
                     BlocProvider.of<AuthBloc>(context).add(CheckOTP(
                       email: emailController.text,
-                      password: passwordController.text, ));
+                      password: passwordController.text,
+                    ));
                     // Navigator.push(context,
                     //     MaterialPageRoute(builder: (context) => Home()));
                   },
+
                   child: BlocConsumer<AuthBloc, AuthState>(
                     builder: (context, state) {
 
@@ -211,10 +214,26 @@ class _LoginState extends State<Login> {
                         Navigator.pop(context);
                         Fluttertoast.showToast(
                           msg: state.error,
+
+                  child:BlocConsumer<AuthBloc,AuthState>(
+                    builder: (context,state){
+                      if(state is CheckingOtp){
+                        return CircularProgressIndicator(
+                          color: Colors.black,
+
                         );
                       }
-                      else if(state is CheckingOtp){
-                        Loading.showLoading(context);
+                      else{
+                        return Text("Log in");
+                      }
+                    },
+                    listener: (context,state){
+                      if(state is OtpChecked){
+                        Fluttertoast.showToast(msg: "Login successfull");
+                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Home()), (Route<dynamic> route) => false);
+                      }
+                      else if(state is OtpError){
+                        Fluttertoast.showToast(msg: state.error);
                       }
                     },
                   ),
@@ -252,8 +271,8 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-            ]),
-          )),
-    );
+            ),),
+          ])),
+    ),);
   }
 }
