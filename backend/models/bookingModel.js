@@ -4,7 +4,23 @@ var SchemaTypes = mongoose.Schema.Types;
 
 
 const bookingModelSchema = new mongoose.Schema({
-    
+    bookingId:{
+        type:mongoose.Schema.Types.ObjectId,ref:"userModel"
+    },
 
+    serviceId:{
+        type: mongoose.Schema.Types.ObjectId,ref:"serviceModel"
+    },
+    date:{
+        type:Date
+    },
+    time:{
+        start:{
+            type:String
+        },
+        end:{
+            type:String
+        },
+    }
 });
 module.exports = mongoose.model("bookingModel", bookingModelSchema);
