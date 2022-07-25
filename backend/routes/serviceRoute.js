@@ -57,7 +57,14 @@ router.post('/deleteServices/admin',adminAuth,async(req,res)=>{
         })
         return;
     }
-    var data=await serviceModel.deleteOne({serviceId:id})
+    var data=await serviceModel.findOneAndDelete({_id:id})
+    if(data==null || data==undefined){
+        res.status(200).json({
+            status:false,
+            msg:"Data not found"
+        })
+        return;
+    }
 
         res.status(200).json({
             status:true,
