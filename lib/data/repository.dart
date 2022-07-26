@@ -48,6 +48,7 @@ class Repository {
     final RegModel regModel = RegModel.fromJson(response);
     return regModel;
   }
+
   Future<ViewServicesModel> viewServices({required String url}) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {

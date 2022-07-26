@@ -18,7 +18,7 @@ class ViewServicesBloc extends Bloc<ViewServicesEvent, ViewServicesState> {
       CheckViewServices event, Emitter<ViewServicesState> emit) async {
     emit(CheckingViewServices());
     ViewServicesModel view;
-    view = await Repository().viewServices(url: '/ward/id');
+    view = await Repository().viewServices(url: '/view/services');
     if (view.status == true) {
       // await TempStorage.addToken(WardModel.token.toString());
       // print(WardModel.token.toString());
