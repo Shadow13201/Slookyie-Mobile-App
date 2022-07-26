@@ -73,5 +73,22 @@ router.post('/book/services',userAuth,async(req,res)=>{
     }
 })
 
+//view booking
+router.get('/viewBooking/admin',adminAuth,async(req,res)=>
+{
+    try 
+    {
+        
+    } 
+    catch (error) 
+    {
+        console.log(error)
+        res.status(500).json({
+            status:false,
+            msg:"Internal Server Error"
+         });
+         return;   
+    }
+})
 
 module.exports=router;
