@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slookyie_max/ui/adminhome.dart';
+import 'package:slookyie_max/ui/booking.dart';
 import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/login.dart';
+import 'bloc/bookingBloc.dart';
 import 'bloc/loginbloc.dart';
 import 'bloc/regBloc.dart';
 import 'bloc/viewServicesBloc.dart';
@@ -33,6 +35,7 @@ class _AppHomeState extends State<AppHome> {
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
         BlocProvider<RegBloc>(create: (context) => RegBloc()),
         BlocProvider<ViewServicesBloc>(create: (context) => ViewServicesBloc()),
+        BlocProvider<BookingBloc>(create: (context) => BookingBloc()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

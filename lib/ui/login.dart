@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:slookyie_max/ui/booking/booking.dart';
 import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/registration.dart';
 
@@ -240,7 +241,7 @@ class _LoginState extends State<Login> {
                   // minWidth:MediaQuery.of(context).size.height*.36,
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUP()));
+                        MaterialPageRoute(builder: (context) => Booking()));
                   },
                   child: const Text(
                     "Sign Up",
