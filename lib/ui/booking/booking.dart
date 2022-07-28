@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slookyie_max/bloc/bookingBloc.dart';
 
 class Booking extends StatefulWidget {
   const Booking({Key? key}) : super(key: key);
@@ -8,14 +10,22 @@ class Booking extends StatefulWidget {
 }
 
 class _BookingState extends State<Booking> {
-
   var startcontroller = TextEditingController();
   var endcontroller = TextEditingController();
   var datecontroller = TextEditingController();
 
   TimeOfDay start = TimeOfDay(hour: 10, minute: 10);
   TimeOfDay end = TimeOfDay(hour: 10, minute: 10);
-  DateTime date = DateTime(2022, 10, 8);
+  DateTime defdate = DateTime(2022, 10, 8);
+  String? bdate;
+
+  DateTime? _dateTimeto;
+  DateTime? _dateTimefrom;
+  DateTime? _dateTimeon;
+
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +39,15 @@ class _BookingState extends State<Booking> {
           children: [
             Text("Select Date "),
             ElevatedButton(
-              child: Text("${date.year}/${date.month}/${date.day}"),
+              child: Text("${defdate.year}/${defdate.month}/${defdate.day}"),
               onPressed: () async {
-                DateTime? newDate = await showDatePicker(
+                await showDatePicker(
                     context: context,
-                    initialDate: date,
+                    initialDate: defdate,
                     firstDate: DateTime(2001),
                     lastDate: DateTime(2030));
-                if (newDate == null) return;
-                setState(() => date = newDate);
+                if (_dateTimeon == null) return;
+                setState(() => defdate = _dateTimeon!);
               },
             ),
             SizedBox(
@@ -56,12 +66,11 @@ class _BookingState extends State<Booking> {
                 ),
                 ElevatedButton(
                   child: Text("${start.hour}:${start.minute}"),
-                  onPressed: () async{
-                    TimeOfDay? newTime = await showTimePicker(
-                        context: context,
-                        initialTime: start);
-                    if(newTime == null) return;
-                    setState(()=> start =newTime);
+                  onPressed: () async {
+                    await showTimePicker(
+                        context: context, initialTime: start);
+                    if (_dateTimefrom == null) return;
+                    setState(() => start = _dateTimefrom as TimeOfDay);
                   },
                 ),
                 Spacer(),
@@ -71,15 +80,25 @@ class _BookingState extends State<Booking> {
                 ),
                 ElevatedButton(
                   child: Text("${end.hour}:${end.minute}"),
-                  onPressed: () async{
-                    TimeOfDay? newTime = await showTimePicker(
-                        context: context,
-                        initialTime: end);
-                    if(newTime == null) return;
-                    setState(()=> end =newTime);
+                  onPressed: () async {
+                    await showTimePicker(
+                        context: context, initialTime: end);
+                    if (_dateTimeto == null) return;
+                    setState(() => end = _dateTimeto as TimeOfDay);
                   },
                 ),
               ],
+            ),
+            Spacer(),
+            MaterialButton(
+              child: Text("Confirm"),
+              onPressed: () {
+                BlocProvider.of<BookingBloc>(context).add(CheckOTP(
+                    start: _dateTimefrom.toString(),
+                    end: _dateTimeto.toString(),
+                    date: _dateTimeon.toString(),
+                    services: ''));
+              },
             )
           ],
         ),

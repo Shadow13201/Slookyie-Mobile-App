@@ -10,8 +10,6 @@ class TempStorage{
     sharedPreferences.setString('role', token);
   }
 
-
-
   static getToken() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getString('token');
