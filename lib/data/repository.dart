@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:slookyie_max/data/models/bookingModel.dart';
 import 'package:slookyie_max/data/models/regModel.dart';
 import 'package:slookyie_max/data/webclient.dart';
 
@@ -48,6 +49,21 @@ class Repository {
     final RegModel regModel = RegModel.fromJson(response);
     return regModel;
   }
+
+  Future<BookingModel> booking({required String url, dynamic data}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.post(url, data);
+    final BookingModel bookingModel = BookingModel.fromJson(response);
+    return bookingModel;
+  }
+
   Future<ViewServicesModel> viewServices({required String url}) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {

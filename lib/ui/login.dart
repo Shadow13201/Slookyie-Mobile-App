@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:slookyie_max/ui/booking/booking.dart';
 import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/registration.dart';
+
 // import 'package:slookyie_max/ui/signUp.dart';
 import '../bloc/loginbloc.dart';
 import '../helper/sharedpreferences.dart';
@@ -56,29 +58,29 @@ class _LoginState extends State<Login> {
 
           child: SingleChildScrollView(
             child: Column(children: [
-              SizedBox(height: 160),
-              Text(
+              const SizedBox(height: 160),
+              const Text(
                 'SLOOKYIE ',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 55, color: Colors.white, fontFamily: "fontStyle"),
               ),
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 'Saloon Booking  ',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20, color: Colors.white, fontFamily: "fontStyle"),
               ),
-              SizedBox(height: 120),
-              Text(
+              const SizedBox(height: 120),
+              const Text(
                 'Please login to Continue',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.white, fontSize: 18, fontFamily: "fontStyle"),
               ),
               Row(
-                children: [
+                children: const [
                   SizedBox(
                     width: 60,
                     height: 20,
@@ -96,31 +98,27 @@ class _LoginState extends State<Login> {
                 height: 44,
                 child: TextField(
                   controller: emailController,
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
                     //suffixIcon: Image.asset("assets/tick.png"),
                     focusedBorder: OutlineInputBorder(
-                      borderSide:
-                      const BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius:
-                      const BorderRadius.all(Radius.circular(5.0)),
+                      borderSide: BorderSide(color: Colors.white, width: 2.0),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       gapPadding: 4.0,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide:
-                      const BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius:
-                      const BorderRadius.all(Radius.circular(5.0)),
+                      borderSide: BorderSide(color: Colors.white, width: 2.0),
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       gapPadding: 4.0,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
-                children: [
+                children: const [
                   SizedBox(
                     width: 60,
                     height: 20,
@@ -138,7 +136,7 @@ class _LoginState extends State<Login> {
                 child: TextField(
                   controller: passwordController,
                   obscureText: _isObscure,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -150,18 +148,18 @@ class _LoginState extends State<Login> {
                         });
                       },
                     ),
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide:
-                      const BorderSide(color: Colors.white, width: 2.0),
+                          BorderSide(color: Colors.white, width: 2.0),
                       borderRadius:
-                      const BorderRadius.all(Radius.circular(5.0)),
+                          BorderRadius.all(Radius.circular(5.0)),
                       gapPadding: 4.0,
                     ),
-                    enabledBorder: OutlineInputBorder(
+                    enabledBorder: const OutlineInputBorder(
                       borderSide:
-                      const BorderSide(color: Colors.white, width: 2.0),
+                          BorderSide(color: Colors.white, width: 2.0),
                       borderRadius:
-                      const BorderRadius.all(Radius.circular(5.0)),
+                          BorderRadius.all(Radius.circular(5.0)),
                       gapPadding: 4.0,
                     ),
                     // hintText: 'USERNAME',
@@ -169,7 +167,7 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -181,18 +179,24 @@ class _LoginState extends State<Login> {
                   minWidth: MediaQuery.of(context).size.width * .36,
                   // minWidth:MediaQuery.of(context).size.height*.36,
                   onPressed: () {
-                    BlocProvider.of<AuthBloc>(context).add(CheckOTP(
+                    BlocProvider.of<AuthBloc>(context).add(
+                        CheckOTP(
                       email: emailController.text,
                       password: passwordController.text,
                     ));
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => Home()));
+                    // if(emailController.text=="seb@gmail.com"){
+                    //   Navigator.push(context,
+                    //       MaterialPageRoute(builder: (context) => Services()));
+                    // }
+                    // else{
+                    //   Fluttertoast.showToast(msg: "Invalid");
+                    // }
                   },
-                  child:BlocConsumer<AuthBloc,AuthState>(
-                    builder: (context,state){
+                  child: BlocConsumer<AuthBloc, AuthState>(
+                    builder: (context, state) {
                       if(state is CheckingOtp){
-                        return CircularProgressIndicator(
-                          color: Colors.black,
+                        return Center(
+                          child: CircularProgressIndicator(),
                         );
                       }
                       else{
@@ -201,41 +205,45 @@ class _LoginState extends State<Login> {
                     },
                     listener: (context,state){
                       if(state is OtpChecked){
-                        Fluttertoast.showToast(msg: "Login successfull");
-                        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Services()), (Route<dynamic> route) => false);
+                        Fluttertoast.showToast(msg: "Logged in");
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Services()),
+                                (Route<dynamic> route) => false);
                       }
-                      else if(state is OtpError){
+                      else if (state is OtpError){
                         Fluttertoast.showToast(msg: state.error);
                       }
-                    },
+                    }
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 "Don't have an account ?",
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
                 width: 290,
                 height: 44,
                 child: MaterialButton(
-                  color: Color(0xffFFFFFF),
+                  color: const Color(0xffFFFFFF),
                   height: 10,
                   minWidth: MediaQuery.of(context).size.width * .36,
                   // minWidth:MediaQuery.of(context).size.height*.36,
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUP()));
+                        MaterialPageRoute(builder: (context) => Booking()));
                   },
-                  child: Text(
+                  child: const Text(
                     "Sign Up",
                     style: TextStyle(
                       color: Color(0XFFff0063),
