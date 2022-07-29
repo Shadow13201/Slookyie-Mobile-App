@@ -29,4 +29,8 @@ class TempStorage{
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getString('service');
   }
+  static addService() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getString('service');
+  }
 }

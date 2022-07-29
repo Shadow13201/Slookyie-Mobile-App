@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slookyie_max/bloc/viewServicesBloc.dart';
 import 'package:slookyie_max/ui/userHome.dart';
 
-import 'booking.dart';
+import 'booking/booking.dart';
 
 class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);
@@ -53,14 +53,14 @@ class _ServicesState extends State<Services> {
                 crossAxisCount: 2,
                 childAspectRatio: 0.9,
               ),
-              itemCount: 7,
+              itemCount: state.view!.data!.length,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Booking()));
+                            builder: (context) => Booking(serviceId: state.view!.data![index].id!)));
                   },
                   child: Column(
                     children: [

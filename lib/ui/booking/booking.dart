@@ -3,16 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slookyie_max/bloc/bookingBloc.dart';
 
 class Booking extends StatefulWidget {
-  const Booking({Key? key}) : super(key: key);
+  final String serviceId;
+  const Booking({Key? key, required this.serviceId}) : super(key: key);
 
   @override
   State<Booking> createState() => _BookingState();
 }
 
 class _BookingState extends State<Booking> {
-  var startcontroller = TextEditingController();
-  var endcontroller = TextEditingController();
-  var datecontroller = TextEditingController();
+  // var _dateTimefrom = TextEditingController();
+  // var _dateTimeto = TextEditingController();
+  // var _dateTimeon = TextEditingController();
 
   TimeOfDay start = TimeOfDay(hour: 10, minute: 10);
   TimeOfDay end = TimeOfDay(hour: 10, minute: 10);
@@ -37,7 +38,7 @@ class _BookingState extends State<Booking> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            Text("Select Date "),
+            Text("Select Date"),
             ElevatedButton(
               child: Text("${defdate.year}/${defdate.month}/${defdate.day}"),
               onPressed: () async {
@@ -91,14 +92,43 @@ class _BookingState extends State<Booking> {
             ),
             Spacer(),
             MaterialButton(
-              child: Text("Confirm"),
+              color: Colors.purple,
+              minWidth: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height/13,
               onPressed: () {
                 BlocProvider.of<BookingBloc>(context).add(CheckOTP(
                     start: _dateTimefrom.toString(),
                     end: _dateTimeto.toString(),
                     date: _dateTimeon.toString(),
-                    services: ''));
+                    services: widget.serviceId));
               },
+              child: BlocConsumer<BookingBloc, BookingState>(
+                builder: (context, state){
+                  if (state is CheckingOtp) {
+                    return CircularProgressIndicator();
+                  } else {
+                    return Text(
+                      "OK",
+                      style: TextStyle(fontSize: 14),
+                    );
+                  }
+                },
+                listener: (context, state){
+                  if(state is OtpChecked){
+                    BlocProvider.of<BookingBloc>(context).add(CheckBooking());
+                    clearText();
+    Navigator.pop(
+    context,
+    MaterialPageRoute(
+    builder: (context) => HomeDD(),
+    ));
+    } else if (state is TaskaddError) {
+    Fluttertoast.showToast(
+    msg: state.error,
+    );
+    }
+                  }
+              ),
             )
           ],
         ),
