@@ -21,6 +21,10 @@ const bookingModelSchema = new mongoose.Schema({
         end:{
             type:String
         },
+    },
+    role:{
+        type:String,
+        default:"booked"
     }
 });
 module.exports = mongoose.model("bookingModel", bookingModelSchema);
