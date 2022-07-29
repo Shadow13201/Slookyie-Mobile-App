@@ -74,21 +74,35 @@ router.post('/book/services',userAuth,async(req,res)=>{
 })
 
 //view booking
-// router.get('/viewBooking/admin',adminAuth,async(req,res)=>
-// {
-//     try 
-//     {
-        
-//     } 
-//     catch (error) 
-//     {
-//         console.log(error)
-//         res.status(500).json({
-//             status:false,
-//             msg:"Internal Server Error"
-//          });
-//          return;   
-//     }
-// })
+router.get('/view/Booking',async(req,res)=>
+{
+    try 
+    {
+        var data=await bookingModel.find({role:'book'})
+        if(data==null || data==undefined)
+        {
+            res.status(200).json({
+                status:false,
+                msg:"data not found"
+            })
+            return;  
+        }
+        res.status(200).json({
+            status:true,
+            msg:"Services Viewed",
+            data:data
+        })
+        return;
+    } 
+    catch (error) 
+    {
+        console.log(error)
+        res.status(500).json({
+            status:false,
+            msg:"Internal Server Error"
+         });
+         return;   
+    }
+})
 
 module.exports=router;
