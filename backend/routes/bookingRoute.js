@@ -78,7 +78,7 @@ router.get('/view/Booking',async(req,res)=>
 {
     try 
     {
-        var data=await bookingModel.find({role:'book'})
+        var data=await bookingModel.find({role:'booked'})
         if(data==null || data==undefined)
         {
             res.status(200).json({
