@@ -41,7 +41,7 @@ class BookingEvent extends Equatable {
 
 
 class CheckOTP extends BookingEvent {
-  final String services,date,start,end;
+  final String services,date,end,start;
   CheckOTP({required this.services,required this.date,required this.end,required this.start});
 }
 
