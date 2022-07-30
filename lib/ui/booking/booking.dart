@@ -47,17 +47,16 @@ class _BookingState extends State<Booking> {
             ElevatedButton(
               child: Text("${defdate.year}/${defdate.month}/${defdate.day}"),
               onPressed: () async{
-                defdate=(await showDatePicker(
+                _dateTimeon=(await showDatePicker(
                   //currentDate: defdate,
                     context: context,
                     initialDate: defdate,
                     firstDate: DateTime(2001),
                     lastDate: DateTime(2030)
                 ))!;
-                setState(() {});
                 //Fluttertoast.showToast(msg: defdate.toString());
                 if (_dateTimeon == null) return;
-                //setState(() => defdate = _dateTimeon!);
+                setState(() => defdate = _dateTimeon!);
               },
             ),
             SizedBox(
