@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:slookyie_max/bloc/bookingBloc.dart';
+import 'package:slookyie_max/bloc/viewBookingBloc.dart';
+import 'package:slookyie_max/ui/home.dart';
 
 class Booking extends StatefulWidget {
   final String serviceId;
+
   const Booking({Key? key, required this.serviceId}) : super(key: key);
 
   @override
@@ -68,8 +73,7 @@ class _BookingState extends State<Booking> {
                 ElevatedButton(
                   child: Text("${start.hour}:${start.minute}"),
                   onPressed: () async {
-                    await showTimePicker(
-                        context: context, initialTime: start);
+                    await showTimePicker(context: context, initialTime: start);
                     if (_dateTimefrom == null) return;
                     setState(() => start = _dateTimefrom as TimeOfDay);
                   },
@@ -82,8 +86,7 @@ class _BookingState extends State<Booking> {
                 ElevatedButton(
                   child: Text("${end.hour}:${end.minute}"),
                   onPressed: () async {
-                    await showTimePicker(
-                        context: context, initialTime: end);
+                    await showTimePicker(context: context, initialTime: end);
                     if (_dateTimeto == null) return;
                     setState(() => end = _dateTimeto as TimeOfDay);
                   },
@@ -94,7 +97,7 @@ class _BookingState extends State<Booking> {
             MaterialButton(
               color: Colors.purple,
               minWidth: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height/13,
+              height: MediaQuery.of(context).size.height / 13,
               onPressed: () {
                 BlocProvider.of<BookingBloc>(context).add(CheckOTP(
                     start: _dateTimefrom.toString(),
@@ -103,32 +106,28 @@ class _BookingState extends State<Booking> {
                     services: widget.serviceId));
               },
               child: BlocConsumer<BookingBloc, BookingState>(
-                builder: (context, state){
-                  if (state is CheckingOtp) {
-                    return CircularProgressIndicator();
-                  } else {
-                    return Text(
-                      "OK",
-                      style: TextStyle(fontSize: 14),
-                    );
-                  }
-                },
-                listener: (context, state){
-                  if(state is OtpChecked){
-                    BlocProvider.of<BookingBloc>(context).add(CheckBooking());
-                    clearText();
-    Navigator.pop(
-    context,
-    MaterialPageRoute(
-    builder: (context) => HomeDD(),
-    ));
-    } else if (state is TaskaddError) {
-    Fluttertoast.showToast(
-    msg: state.error,
-    );
-    }
-                  }
-              ),
+                  builder: (context, state) {
+                if (state is CheckingOtp) {
+                  return CircularProgressIndicator();
+                } else {
+                  return Text(
+                    "Confirm",
+                    style: TextStyle(color: Colors.white,fontSize: 14),
+                  );
+                }
+              }, listener: (context, state) {
+                if (state is OtpChecked) {
+                  BlocProvider.of<ViewBookingBloc>(context)
+                      .add(CheckViewBooking());
+
+                  Navigator.pop(
+                      context, MaterialPageRoute(builder: (context) => Home()));
+                } else if (state is ViewBookingError) {
+                  Fluttertoast.showToast(
+                    msg: ("Melbin's Dad"),
+                  );
+                }
+              }),
             )
           ],
         ),
