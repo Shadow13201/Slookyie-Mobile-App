@@ -106,11 +106,16 @@ class _BookingState extends State<Booking> {
               minWidth: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 13,
               onPressed: () {
-                BlocProvider.of<BookingBloc>(context).add(CheckOTP(
-                    start: _dateTimefrom!.toString(),
-                    end: _dateTimeto!.toString(),
-                    date: _dateTimeon.toString(),
-                    services: widget.serviceId));
+                if(_dateTimefrom!= null && _dateTimeto !=null && _dateTimeon != null){BlocProvider.of<BookingBloc>(context).add(CheckOTP(
+                    start: "${_dateTimefrom!.hour}:${_dateTimefrom!.minute}",
+                    end: "${_dateTimeto!.hour}:${_dateTimeto!.minute}",
+                    date: "${_dateTimeon!.day}/${_dateTimeon!.month}/${_dateTimeon!.year}",
+                    services: widget.serviceId
+                )
+                );}
+                else{
+                  Fluttertoast.showToast(msg: "Please make changes");
+                }
               },
               child: BlocConsumer<BookingBloc, BookingState>(
                   builder: (context, state) {
@@ -124,9 +129,9 @@ class _BookingState extends State<Booking> {
                 }
               }, listener: (context, state) {
                 if (state is OtpChecked) {
-                  BlocProvider.of<ViewBookingBloc>(context)
-                      .add(CheckViewBooking());
-
+                  // BlocProvider.of<ViewBookingBloc>(context)
+                  //     .add(CheckViewBooking());
+                  Fluttertoast.showToast(msg: "Booking successful");
                   Navigator.pop(
                       context, MaterialPageRoute(builder: (context) => Home()));
                 } else if (state is ViewBookingError) {
