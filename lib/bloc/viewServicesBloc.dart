@@ -16,8 +16,9 @@ class ViewServicesBloc extends Bloc<ViewServicesEvent, ViewServicesState> {
   Future<FutureOr<void>>
   _CheckViewServices(
       CheckViewServices event, Emitter<ViewServicesState> emit) async {
-    emit(CheckingViewServices());
     ViewServicesModel view;
+    emit(CheckingViewServices());
+
     view = await Repository().viewServices(url: '/view/services');
     if (view.status == true) {
       // await TempStorage.addToken(WardModel.token.toString());
