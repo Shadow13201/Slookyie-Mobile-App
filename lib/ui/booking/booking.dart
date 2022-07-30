@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:slookyie_max/bloc/bookingBloc.dart';
 import 'package:slookyie_max/bloc/viewBookingBloc.dart';
 import 'package:slookyie_max/ui/home.dart';
@@ -23,7 +22,6 @@ class _BookingState extends State<Booking> {
   TimeOfDay start = TimeOfDay(hour: 10, minute: 10);
   TimeOfDay end = TimeOfDay(hour: 10, minute: 10);
   DateTime defdate = DateTime(2022, 10, 8);
-  String? bdate;
 
   DateTime? _dateTimeto;
   DateTime? _dateTimefrom;
