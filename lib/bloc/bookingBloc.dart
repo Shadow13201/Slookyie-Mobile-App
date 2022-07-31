@@ -16,9 +16,12 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     BookingModel bookingModel;
     Map data = {
       "serviceId": event.services,
+      "time":{
+        "end":event.end,
+        "start":event.start,
+      },
       "date":event.date,
-      "start":event.start,
-      "end":event.end,
+
     };
 
 

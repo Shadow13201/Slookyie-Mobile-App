@@ -12,7 +12,8 @@ const bookingModelSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,ref:"serviceModel"
     },
     date:{
-        type:Date
+        //type:Date
+        type:String
     },
     time:{
         start:{
