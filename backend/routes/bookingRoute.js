@@ -12,7 +12,7 @@ var jwt = require('jsonwebtoken');
 router.post('/book/services',userAuth,async(req,res)=>{
     try 
     {
-     var{serviceId,date,time }=req.body;
+     var{serviceId,date,time}=req.body;
      var id=req.user.id;
      console.log(id)
      if(serviceId==null || serviceId==undefined)
@@ -31,7 +31,7 @@ router.post('/book/services',userAuth,async(req,res)=>{
         });
         return;
      }  
-     if(time==null || time==undefined)
+     if(time==null || time==undefined )
      {
         res.status(200).json({
             status:false,

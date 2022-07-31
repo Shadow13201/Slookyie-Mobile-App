@@ -16,9 +16,12 @@ class BookingBloc extends Bloc<BookingEvent, BookingState> {
     BookingModel bookingModel;
     Map data = {
       "serviceId": event.services,
+      "time":{
+        "end":event.end,
+        "start":event.start,
+      },
       "date":event.date,
-      "start":event.start,
-      "end":event.end,
+
     };
 
 
@@ -41,7 +44,7 @@ class BookingEvent extends Equatable {
 
 
 class CheckOTP extends BookingEvent {
-  final String services,date,start,end;
+  final String services,date,end,start;
   CheckOTP({required this.services,required this.date,required this.end,required this.start});
 }
 
