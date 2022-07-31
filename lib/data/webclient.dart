@@ -4,15 +4,10 @@ import '../helper/sharedpreferences.dart';
 
 class WebClient {
 
-  static const ip = "http://192.168.1.104:8080";
+  static const ip = "http://192.168.1.103:8080";
 // static const ip = "http://192.168.49.189:8080";
   //static const ip = "http://192.168.49.29:5555";
 //  static const ip="https://periyarproject.herokuapp.com";
-
-//static const ip = "http://192.168.48.145:5555";
-  //static const ip = "http://192.168.49.29:5555";
-  // static const ip="https://periyarproject.herokuapp.com";
-
 
   static Future<dynamic> post(url, data) async {
     var token = await TempStorage.getToken();
