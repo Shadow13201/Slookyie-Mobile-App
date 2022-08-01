@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slookyie_max/bloc/addStaffBloc.dart';
 import 'package:slookyie_max/ui/adminhome.dart';
 import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/homeServices.dart';
@@ -39,6 +40,7 @@ class _AppHomeState extends State<AppHome> {
         BlocProvider<BookingBloc>(create: (context) => BookingBloc()),
         BlocProvider<ViewBookingBloc>(create: (context) => ViewBookingBloc()),
         BlocProvider<ViewStaffBloc>(create: (context) => ViewStaffBloc()),
+        BlocProvider<AddStaffBloc>(create: (context) => AddStaffBloc()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -37,7 +37,7 @@ class _ServicesState extends State<Services> {
         elevation: 0,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.shopping_cart),
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Home()));
