@@ -21,7 +21,7 @@ class LogOutBloc extends Bloc<LogOutEvent, LogOutState> {
 
 
     logoutModel =
-    await Repository().logout(url: '/logout/user', );
+    await Repository().logout(url: '/logout/admin', );
     if (logoutModel.status == true) {
       await TempStorage.removeToken();
 

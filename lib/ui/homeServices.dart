@@ -6,7 +6,10 @@ import 'package:slookyie_max/bloc/viewServicesBloc.dart';
 import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/userHome.dart';
 
+import '../bloc/logoutUserBloc.dart';
+import '../loadingscreen.dart';
 import 'booking/booking.dart';
+import 'login.dart';
 
 class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);
@@ -62,7 +65,8 @@ class _ServicesState extends State<Services> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Booking(serviceId: state.view!.data![index].id!)));
+                            builder: (context) => Booking(
+                                serviceId: state.view!.data![index].id!)));
                   },
                   child: Column(
                     children: [
@@ -80,13 +84,16 @@ class _ServicesState extends State<Services> {
                                 Container(
                                   color: const Color(0xffFF0063),
                                   height:
-                                      MediaQuery.of(context).size.height / 5,
-                                  width: MediaQuery.of(context).size.width / 2,
+                                      MediaQuery.of(context).size.height /
+                                          5,
+                                  width:
+                                      MediaQuery.of(context).size.width / 2,
                                   child: Center(
                                     child: Text(
                                         state.view!.data![index].service!,
                                         style: const TextStyle(
-                                            color: Colors.white, fontSize: 20)),
+                                            color: Colors.white,
+                                            fontSize: 20)),
                                   ),
                                 ),
                               ],
@@ -107,6 +114,32 @@ class _ServicesState extends State<Services> {
           );
         }
       }),
+      floatingActionButton: FloatingActionButton(onPressed: () {BlocProvider.of<LogOutUserBloc>(context).add(CheckLOGOUTUser());
+        },
+        child: BlocConsumer<LogOutUserBloc, LogOutUserState>(
+          builder: (context, state) {
+
+            return Icon(Icons.logout_rounded);
+
+          },
+          listener: (context, state) {
+            if (state is LogoutUserChecked) {
+              Navigator.pop(context);
+              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                  Login()), (Route<dynamic> route) => false);
+            } else if (state is LogoutUserError) {
+              Navigator.pop(context);
+              Fluttertoast.showToast(
+
+                msg: state.error,
+              );
+            }
+            else if(state is CheckingLogoutUser){
+              Loading.showLoading(context);
+            }
+          },
+        ),
+      ),
     );
   }
 }

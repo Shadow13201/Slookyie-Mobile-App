@@ -49,6 +49,7 @@ dependencies:
   avatar_view: ^1.0.1
   syncfusion_flutter_datepicker: ^20.2.39
   time_range: ^1.0.3
+  flutter_speed_dial: ^6.0.0
 
 
 dev_dependencies:

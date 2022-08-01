@@ -8,6 +8,7 @@ import 'package:slookyie_max/ui/login.dart';
 import 'bloc/bookingBloc.dart';
 import 'bloc/loginbloc.dart';
 import 'bloc/logoutBloc.dart';
+import 'bloc/logoutUserBloc.dart';
 import 'bloc/regBloc.dart';
 import 'bloc/viewBookingBloc.dart';
 import 'bloc/viewServicesBloc.dart';
@@ -38,6 +39,7 @@ class _AppHomeState extends State<AppHome> {
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
         BlocProvider<RegBloc>(create: (context) => RegBloc()),
         BlocProvider<LogOutBloc>(create: (context) => LogOutBloc()),
+        BlocProvider<LogOutUserBloc>(create: (context) => LogOutUserBloc()),
         BlocProvider<ViewServicesBloc>(create: (context) => ViewServicesBloc()),
         BlocProvider<BookingBloc>(create: (context) => BookingBloc()),
         BlocProvider<ViewBookingBloc>(create: (context) => ViewBookingBloc()),
