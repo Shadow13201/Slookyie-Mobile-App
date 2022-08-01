@@ -10,6 +10,8 @@ class AddStaff extends StatefulWidget {
 class _AddStaffState extends State<AddStaff> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.white,
+    );
   }
 }
