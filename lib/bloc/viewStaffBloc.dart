@@ -16,16 +16,16 @@ class ViewStaffBloc extends Bloc<ViewStaffEvent, ViewStaffState> {
   Future<FutureOr<void>>
   _CheckViewStaff(
       CheckViewStaff event, Emitter<ViewStaffState> emit) async {
-    ViewStaffModel view;
+    ViewStaffModel viewstaff;
     emit(CheckingViewStaff());
 
-    view = await Repository().viewStaff(url: '/view/staff');
-    if (view.status == true) {
+    viewstaff = await Repository().viewStaff(url: '/view/staff');
+    if (viewstaff.status == true) {
       // await TempStorage.addToken(WardModel.token.toString());
       // print(WardModel.token.toString());
-      emit(ViewStaffChecked(view));
+      emit(ViewStaffChecked(viewstaff));
     } else {
-      emit(ViewStaffError(error: view.msg.toString()));
+      emit(ViewStaffError(error: viewstaff.msg.toString()));
     }
   }
 }
@@ -52,8 +52,8 @@ class ViewStaffState extends Equatable {
 
 class CheckingViewStaff extends ViewStaffState {}
 class ViewStaffChecked extends ViewStaffState {
-  final ViewStaffModel? view;
-  ViewStaffChecked(this.view);
+  final ViewStaffModel? viewstaff;
+  ViewStaffChecked(this.viewstaff);
 }
 
 class ViewStaffError extends ViewStaffState {
