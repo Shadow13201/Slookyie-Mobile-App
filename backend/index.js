@@ -8,9 +8,11 @@ var useragent = require('express-useragent');
 var path = require('path');
 
 //route intialisation
-const userRoute=require('../backend/routes/userRoute');
-const serviceRoute=require('../backend/routes/serviceRoute');
-const bookingRoute=require('../backend/routes/bookingRoute');
+const userRoute=require('./routes/userRoute');
+const serviceRoute=require('./routes/serviceRoute');
+const bookingRoute=require('./routes/bookingRoute');
+const staffRoute=require('./routes/staffRoute')
+
 var app=express();
 app.use(cors());
 app.use(helmet());
@@ -73,6 +75,7 @@ app.get('/wp/:id', (req, res) => {
 app.use(userRoute)
 app.use(serviceRoute)
 app.use(bookingRoute)
+app.use(staffRoute)
 
 app.get('/health', async (req, res) => {
     res.send({
