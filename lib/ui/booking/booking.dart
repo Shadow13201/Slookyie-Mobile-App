@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slookyie_max/bloc/bookingBloc.dart';
-import 'package:slookyie_max/bloc/viewBookingBloc.dart';
 import 'package:slookyie_max/ui/home.dart';
 
 class Booking extends StatefulWidget {
@@ -132,7 +131,7 @@ class _BookingState extends State<Booking> {
                   Fluttertoast.showToast(msg: "Booking successful");
                   Navigator.pop(
                       context, MaterialPageRoute(builder: (context) => Home()));
-                } else if (state is ViewBookingError) {
+                } else {
                   Fluttertoast.showToast(
                     msg: ("Melbin's Dad"),
                   );

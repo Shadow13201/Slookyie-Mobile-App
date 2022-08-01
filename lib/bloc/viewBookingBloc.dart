@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../data/models/viewBookingModel.dart';
+import '../data/models/ViewBookingModel.dart';
 import '../data/repository.dart';
 
 class ViewBookingBloc extends Bloc<ViewBookingEvent, ViewBookingState> {
@@ -16,15 +16,16 @@ class ViewBookingBloc extends Bloc<ViewBookingEvent, ViewBookingState> {
   Future<FutureOr<void>>
   _CheckViewBooking(
       CheckViewBooking event, Emitter<ViewBookingState> emit) async {
+    ViewBookingModel viewBoo;
     emit(CheckingViewBooking());
-    ViewBookingModel viewBooking;
-    viewBooking = (await Repository().viewBooking(url: '/view/booking')) as ViewBookingModel;
-    if (viewBooking.status == true) {
+
+    viewBoo = await Repository().viewBooking(url: '/view/booking');
+    if (viewBoo.status == true) {
       // await TempStorage.addToken(WardModel.token.toString());
       // print(WardModel.token.toString());
-      emit(ViewBookingChecked(viewBooking));
+      emit(ViewBookingChecked(viewBoo));
     } else {
-      emit(ViewBookingError(error: viewBooking.msg.toString()));
+      emit(ViewBookingError(error: viewBoo.msg.toString()));
     }
   }
 }
