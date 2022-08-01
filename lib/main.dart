@@ -7,7 +7,9 @@ import 'package:slookyie_max/ui/login.dart';
 import 'bloc/bookingBloc.dart';
 import 'bloc/loginbloc.dart';
 import 'bloc/regBloc.dart';
+import 'bloc/viewBookingBloc.dart';
 import 'bloc/viewServicesBloc.dart';
+import 'bloc/viewStaffBloc.dart';
 import 'helper/sharedpreferences.dart';
 
 void main() => runApp(const AppHome());
@@ -35,6 +37,8 @@ class _AppHomeState extends State<AppHome> {
         BlocProvider<RegBloc>(create: (context) => RegBloc()),
         BlocProvider<ViewServicesBloc>(create: (context) => ViewServicesBloc()),
         BlocProvider<BookingBloc>(create: (context) => BookingBloc()),
+        BlocProvider<ViewBookingBloc>(create: (context) => ViewBookingBloc()),
+        BlocProvider<ViewStaffBloc>(create: (context) => ViewStaffBloc()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
