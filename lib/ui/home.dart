@@ -1,9 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slookyie_max/ui/staffselect.dart';
-
-import '../bloc/viewServicesBloc.dart';
-import 'profile.dart';
+import 'package:slookyie_max/bloc/viewBookingBloc.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,116 +11,89 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  DateTime date = DateTime(2022, 10, 8);
+  void initState() {
+    super.initState();
+    BlocProvider.of<ViewBookingBloc>(context).add(CheckViewBooking());
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //drawer: OutDrawer().build(context, setState),
       appBar: AppBar(
-        backgroundColor: Color(0xffFF0063),
-        title: Text(
-          "Home",
-          style: TextStyle(color: Colors.black),
-        ),
-      ),
-      backgroundColor: Colors.greenAccent,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            BlocBuilder<ViewServicesBloc, ViewServicesState>(
-                builder: (context, state) {
-              if (state is ViewServicesChecked) {
-                return ListView.builder(
-                    physics: ClampingScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: state.view!.data!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height / 5,
-                        child: InkWell(
-                          onTap: () async {
-                            DateTime? newDate = await showDatePicker(
-                                context: context,
-                                initialDate: date,
-                                firstDate: DateTime(2001),
-                                lastDate: DateTime(2030));
-                            if (newDate == null) return;
-                            setState(() => date = newDate);
-                          },
-                          child: Card(
-                            color: Colors.purple,
-                            child: Stack(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage("assets/max2.png"),
-                                          fit: BoxFit.fitHeight)),
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 10.0),
-                                      child: Text(state.view!.data![index].service!,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 21,
-                                              fontWeight: FontWeight.bold)),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    });
-              } else if (state is ViewServicesError) {
-                return Center(
-                  child: Text(state.error),
-                );
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.pinkAccent,
-                  ),
-                );
-              }
-            })
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 13,
-          child: Row(
-            children: [
-              Icon(Icons.account_circle_sharp),
-              Spacer(),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Profile()));
-                },
-                child: CircleAvatar(child: Icon(Icons.account_circle_sharp)),
-              ),
-            ],
+        backgroundColor: const Color(0xffFF0063),
+        title: Center(
+          child: const Text(
+            "BOOKINGS",
+            style: TextStyle(color: Colors.white, fontSize: 22),
           ),
         ),
+        elevation: 0,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: () {},
-        child: Icon(
-          Icons.add,
-          color: Colors.purple,
-        ),
-      ),
+      body: BlocBuilder<ViewBookingBloc, ViewBookingState>(
+          builder: (context, state) {
+            if (state is ViewBookingChecked) {
+              return ListView.builder(
+                //physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: state.viewBooking!.data!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(6, 20, 6, 4),
+                          child: Card(
+                              color: Colors.white70,
+                              elevation: 15,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(20)),
+                              ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    color: const Color(0xffFF0063),
+                                    height:
+                                    MediaQuery.of(context).size.height / 5,
+                                    width: MediaQuery.of(context).size.width / 2,
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                            state.viewBooking!.data![index].date!,
+                                            style: const TextStyle(
+                                                color: Colors.white, fontSize: 20)),
+                                        Spacer(),
+                                        Text(
+                                            state.viewBooking!.data![index].time!.start!,
+                                            style: const TextStyle(
+                                                color: Colors.white, fontSize: 20)),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ),
+                      ],
+                    );
+                  });
+            } else if (state is CheckingViewBooking) {
+              return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.pinkAccent,
+                  ));
+            } else {
+              return const Center(
+                child: Text("error"),
+              );
+            }
+          }),
     );
   }
 }

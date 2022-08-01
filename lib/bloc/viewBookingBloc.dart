@@ -17,14 +17,14 @@ class ViewBookingBloc extends Bloc<ViewBookingEvent, ViewBookingState> {
   _CheckViewBooking(
       CheckViewBooking event, Emitter<ViewBookingState> emit) async {
     emit(CheckingViewBooking());
-    ViewBookingModel view;
-    view = (await Repository().viewBooking(url: '/view/booking')) as ViewBookingModel;
-    if (view.status == true) {
+    ViewBookingModel viewBooking;
+    viewBooking = (await Repository().viewBooking(url: '/view/booking')) as ViewBookingModel;
+    if (viewBooking.status == true) {
       // await TempStorage.addToken(WardModel.token.toString());
       // print(WardModel.token.toString());
-      emit(ViewBookingChecked(view));
+      emit(ViewBookingChecked(viewBooking));
     } else {
-      emit(ViewBookingError(error: view.msg.toString()));
+      emit(ViewBookingError(error: viewBooking.msg.toString()));
     }
   }
 }
@@ -51,8 +51,8 @@ class ViewBookingState extends Equatable {
 
 class CheckingViewBooking extends ViewBookingState {}
 class ViewBookingChecked extends ViewBookingState {
-  final ViewBookingModel? view;
-  ViewBookingChecked(this.view);
+  final ViewBookingModel? viewBooking;
+  ViewBookingChecked(this.viewBooking);
 }
 
 class ViewBookingError extends ViewBookingState {

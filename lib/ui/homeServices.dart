@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slookyie_max/bloc/viewServicesBloc.dart';
+import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/userHome.dart';
 
 import 'booking/booking.dart';
@@ -39,7 +40,7 @@ class _ServicesState extends State<Services> {
             icon: const Icon(Icons.search),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const UserHome()));
+                  MaterialPageRoute(builder: (context) => const Home()));
             },
           ),
         ],
