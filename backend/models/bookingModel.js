@@ -4,12 +4,15 @@ var SchemaTypes = mongoose.Schema.Types;
 
 
 const bookingModelSchema = new mongoose.Schema({
-    bookingId:{
+    UserId:{
         type:mongoose.Schema.Types.ObjectId,ref:"userModel"
     },
 
     serviceId:{
         type: mongoose.Schema.Types.ObjectId,ref:"serviceModel"
+    },
+    bookingId:{
+        type:String
     },
     date:{
         //type:Date

@@ -12,6 +12,15 @@ var jwt = require('jsonwebtoken');
 router.post('/book/services',userAuth,async(req,res)=>{
     try 
     {
+        var UserId=req.user.id;
+        if(UserId==null || UserId==undefined)
+        {
+           res.status(200).json({
+               status:false,
+               msg:" User Not Found"
+           });
+           return;
+        } 
      var{serviceId,date,time}=req.body;
      var id=req.user.id;
      console.log(id)
@@ -49,6 +58,7 @@ router.post('/book/services',userAuth,async(req,res)=>{
         return;
      } 
      var data=new bookingModel()
+     data.UserId=req.user.id
      data.serviceId=serviceId
      data.date=date
      data.time.start=time.start
