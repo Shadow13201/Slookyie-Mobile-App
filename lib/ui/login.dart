@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:slookyie_max/ui/adminhome.dart';
 import 'package:slookyie_max/ui/booking/booking.dart';
 import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/registration.dart';
@@ -208,11 +209,19 @@ class _LoginState extends State<Login> {
                     listener: (context,state){
                       if(state is OtpChecked){
                         Fluttertoast.showToast(msg: "Logged in");
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Services()),
-                                (Route<dynamic> route) => false);
+                        if(state.role == 'user'){
+                          {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              Services()), (Route<dynamic> route) => false);}}
+                        }
+                      else if (state.role == 'admin'){
+                          {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              AdminHome()), (Route<dynamic> route) => false);}}
+                        }
+                        // Navigator.pushAndRemoveUntil(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => const Services()),
+                        //         (Route<dynamic> route) => false);
                       }
                       else if (state is OtpError){
                         Fluttertoast.showToast(msg: state.error);

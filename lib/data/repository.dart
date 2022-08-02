@@ -7,7 +7,9 @@ import 'package:slookyie_max/data/webclient.dart';
 
 import 'models/LoginModel.dart';
 import 'models/LogoutModel.dart';
+import 'models/addStaffModel.dart';
 import 'models/viewServicesModel.dart';
+import 'models/viewStaffModel.dart';
 
 class Repository {
   Future<LoginModel> login({required String url, dynamic data}) async {
@@ -51,6 +53,20 @@ class Repository {
     return regModel;
   }
 
+  Future<AddStaffModel> addStaff({required String url, dynamic data}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.post(url, data);
+    final AddStaffModel addStaffModel = AddStaffModel.fromJson(response);
+    return addStaffModel;
+  }
+
   Future<BookingModel> booking({required String url, dynamic data}) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
@@ -77,6 +93,20 @@ class Repository {
     final dynamic response = await WebClient.get(url);
     final ViewServicesModel view = ViewServicesModel.fromJson(response);
     return view;
+  }
+
+  Future<ViewStaffModel> viewStaff({required String url}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.get(url);
+    final ViewStaffModel viewStaff = ViewStaffModel.fromJson(response);
+    return viewStaff;
   }
 
   Future<ViewBookingModel> viewBooking({required String url}) async {

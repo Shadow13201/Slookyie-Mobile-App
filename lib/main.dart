@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:slookyie_max/bloc/addStaffBloc.dart';
 import 'package:slookyie_max/ui/adminhome.dart';
 import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/login.dart';
 import 'bloc/bookingBloc.dart';
 import 'bloc/loginbloc.dart';
+import 'bloc/logoutBloc.dart';
+import 'bloc/logoutUserBloc.dart';
 import 'bloc/regBloc.dart';
+import 'bloc/viewBookingBloc.dart';
 import 'bloc/viewServicesBloc.dart';
+import 'bloc/viewStaffBloc.dart';
 import 'helper/sharedpreferences.dart';
 
 void main() => runApp(const AppHome());
@@ -33,8 +38,13 @@ class _AppHomeState extends State<AppHome> {
       providers: [
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
         BlocProvider<RegBloc>(create: (context) => RegBloc()),
+        BlocProvider<LogOutBloc>(create: (context) => LogOutBloc()),
+        BlocProvider<LogOutUserBloc>(create: (context) => LogOutUserBloc()),
         BlocProvider<ViewServicesBloc>(create: (context) => ViewServicesBloc()),
         BlocProvider<BookingBloc>(create: (context) => BookingBloc()),
+        BlocProvider<ViewBookingBloc>(create: (context) => ViewBookingBloc()),
+        BlocProvider<ViewStaffBloc>(create: (context) => ViewStaffBloc()),
+        BlocProvider<AddStaffBloc>(create: (context) => AddStaffBloc()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
