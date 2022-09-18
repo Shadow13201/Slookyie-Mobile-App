@@ -5,6 +5,7 @@ import 'package:slookyie_max/ui/adminhome.dart';
 import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/login.dart';
+import 'bloc/addServiceBloc.dart';
 import 'bloc/bookingBloc.dart';
 import 'bloc/loginbloc.dart';
 import 'bloc/logoutBloc.dart';
@@ -45,6 +46,7 @@ class _AppHomeState extends State<AppHome> {
         BlocProvider<ViewBookingBloc>(create: (context) => ViewBookingBloc()),
         BlocProvider<ViewStaffBloc>(create: (context) => ViewStaffBloc()),
         BlocProvider<AddStaffBloc>(create: (context) => AddStaffBloc()),
+        BlocProvider<AddServiceBloc>(create: (context) => AddServiceBloc()),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,

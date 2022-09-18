@@ -7,6 +7,7 @@ import 'package:slookyie_max/data/webclient.dart';
 
 import 'models/LoginModel.dart';
 import 'models/LogoutModel.dart';
+import 'models/addServiceModel.dart';
 import 'models/addStaffModel.dart';
 import 'models/viewServicesModel.dart';
 import 'models/viewStaffModel.dart';
@@ -65,6 +66,20 @@ class Repository {
     final dynamic response = await WebClient.post(url, data);
     final AddStaffModel addStaffModel = AddStaffModel.fromJson(response);
     return addStaffModel;
+  }
+
+  Future<AddServiceModel> addService({required String url, dynamic data}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.post(url, data);
+    final AddServiceModel addServiceModel = AddServiceModel.fromJson(response);
+    return addServiceModel;
   }
 
   Future<BookingModel> booking({required String url, dynamic data}) async {

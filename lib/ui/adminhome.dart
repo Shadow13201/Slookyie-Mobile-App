@@ -8,6 +8,7 @@ import 'package:slookyie_max/ui/login.dart';
 import '../bloc/logoutBloc.dart';
 import '../bloc/viewServicesBloc.dart';
 import '../loadingscreen.dart';
+import 'addService.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);
@@ -58,6 +59,7 @@ class _AdminHomeState extends State<AdminHome> {
                       if (state is ViewStaffChecked) {
                         return GridView.builder(
                             shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
                             gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
@@ -66,39 +68,39 @@ class _AdminHomeState extends State<AdminHome> {
                             itemCount: state.viewstaff!.data!.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.fromLTRB(6, 20, 6, 4),
-                                    child: Card(
-                                        color: Colors.white70,
-                                        elevation: 15,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              color: const Color(0xffFF0063),
-                                              height:
-                                              MediaQuery.of(context).size.height /
-                                                  5,
-                                              width:
-                                              MediaQuery.of(context).size.width /
-                                                  2,
-                                              child: Center(
-                                                child: Text(
-                                                    state.viewstaff!.data![index].staff!,
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20)),
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(6, 20, 6, 4),
+                                      child: Card(
+                                          color: Colors.white70,
+                                          elevation: 15,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(20)),
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                color: const Color(0xffFF0063),
+                                                height:
+                                                MediaQuery.of(context).size.height /
+                                                    5,
+                                                width:
+                                                MediaQuery.of(context).size.width /
+                                                    2,
+                                                child: Center(
+                                                  child: Text(
+                                                      state.viewstaff!.data![index].staff!,
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20)),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        )),
-                                  ),
-                                ],
-                              );
+                                            ],
+                                          )),
+                                    ),
+                                  ],
+                                );
                             });
                       } else if (state is CheckingViewServices) {
                         return const Center(
@@ -184,7 +186,7 @@ class _AdminHomeState extends State<AdminHome> {
               SpeedDialChild(
                 child: Icon(Icons.add),
                 label: "Service",
-                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> AddStaff())),
+                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> AddService())),
               ),
               SpeedDialChild(
                 child: Icon(Icons.add),
