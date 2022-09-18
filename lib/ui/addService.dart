@@ -100,7 +100,7 @@ class _AddServiceState extends State<AddService> {
                           )
                       )
                     },
-                    height: 10,
+                    height: 30,
                     minWidth: MediaQuery.of(context).size.width * .36,
 
                     color: Color(0xffFFFFFF),
