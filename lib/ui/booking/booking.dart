@@ -35,6 +35,7 @@ class _BookingState extends State<Booking> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Booking"),
+          backgroundColor: Color(0xffFF0063)
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -99,7 +100,7 @@ class _BookingState extends State<Booking> {
             ),
             Spacer(),
             MaterialButton(
-              color: Colors.purple,
+              color: Color(0xffFF0063),
               minWidth: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 13,
               onPressed: () {
@@ -133,7 +134,7 @@ class _BookingState extends State<Booking> {
                       context, MaterialPageRoute(builder: (context) => Home()));
                 } else {
                   Fluttertoast.showToast(
-                    msg: ("Melbin's Dad"),
+                    msg: ("Loading..."),
                   );
                 }
               }),

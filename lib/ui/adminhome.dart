@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -6,8 +7,11 @@ import 'package:slookyie_max/bloc/viewStaffBloc.dart';
 import 'package:slookyie_max/ui/addStaff.dart';
 import 'package:slookyie_max/ui/login.dart';
 import '../bloc/logoutBloc.dart';
+import '../bloc/removeServiceBloc.dart';
+import '../bloc/removeStaffBloc.dart';
 import '../bloc/viewServicesBloc.dart';
 import '../loadingscreen.dart';
+import 'addService.dart';
 
 class AdminHome extends StatefulWidget {
   const AdminHome({Key? key}) : super(key: key);
@@ -40,10 +44,16 @@ class _AdminHomeState extends State<AdminHome> {
               labelColor: Colors.black,
               tabs: [
                 Tab(
-                  child: Text("Staff",style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    "Staff",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
                 Tab(
-                  child: Text("Services",style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    "Services",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -58,8 +68,9 @@ class _AdminHomeState extends State<AdminHome> {
                       if (state is ViewStaffChecked) {
                         return GridView.builder(
                             shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
                             gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               childAspectRatio: 0.9,
                             ),
@@ -68,31 +79,105 @@ class _AdminHomeState extends State<AdminHome> {
                               return Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(6, 20, 6, 4),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(6, 20, 6, 4),
                                     child: Card(
                                         color: Colors.white70,
                                         elevation: 15,
                                         shape: const RoundedRectangleBorder(
-                                          borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20)),
                                         ),
                                         child: Column(
                                           children: [
-                                            Container(
-                                              color: const Color(0xffFF0063),
-                                              height:
-                                              MediaQuery.of(context).size.height /
-                                                  5,
-                                              width:
-                                              MediaQuery.of(context).size.width /
-                                                  2,
-                                              child: Center(
-                                                child: Text(
-                                                    state.viewstaff!.data![index].staff!,
-                                                    style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20)),
+                                            InkWell(
+                                              child: Container(
+                                                color: const Color(0xffFF0063),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    5,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2,
+                                                child: Center(
+                                                  child: Text(
+                                                      state.viewstaff!
+                                                          .data![index].staff!,
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20)),
+                                                ),
                                               ),
+                                              onTap: () async {
+                                                print('tap');
+                                                await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (context) =>
+                                                            AlertDialog(
+                                                              title: Text(
+                                                                  "Delete?"),
+                                                              actions: [
+                                                                MaterialButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    Navigator.pop(
+                                                                        context);
+                                                                  },
+                                                                  child: Text(
+                                                                      "No"),
+                                                                ),
+                                                                MaterialButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      BlocProvider.of<RemoveStaffBloc>(context).add(CheckRemoveStaff(
+                                                                          id: state
+                                                                              .viewstaff!
+                                                                              .data![index]
+                                                                              .id!));
+                                                                    },
+                                                                    child: BlocConsumer<
+                                                                        RemoveStaffBloc,
+                                                                        RemoveStaffState>(
+                                                                      builder:
+                                                                          (context,
+                                                                              state) {
+                                                                        return Text(
+                                                                          "Yes",
+                                                                        );
+                                                                      },
+                                                                      listener:
+                                                                          (context,
+                                                                              state) {
+                                                                        if (state
+                                                                            is RemoveStaffChecked) {
+                                                                          BlocProvider.of<ViewStaffBloc>(context)
+                                                                              .add(CheckViewStaff());
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                        } else if (state
+                                                                            is RemoveStaffError) {
+                                                                          Navigator.pop(
+                                                                              context);
+                                                                          Fluttertoast
+                                                                              .showToast(
+                                                                            msg:
+                                                                                state.error,
+                                                                          );
+                                                                        } else if (state
+                                                                            is CheckingRemoveStaff) {
+                                                                          Loading.showLoading(
+                                                                              context);
+                                                                        }
+                                                                      },
+                                                                    ))
+                                                              ],
+                                                            ));
+                                              },
                                             ),
                                           ],
                                         )),
@@ -112,7 +197,7 @@ class _AdminHomeState extends State<AdminHome> {
                       }
                     }),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height/14,
+                      height: MediaQuery.of(context).size.height / 14,
                     ),
                   ],
                 ),
@@ -142,21 +227,94 @@ class _AdminHomeState extends State<AdminHome> {
                                   ),
                                   child: Column(
                                     children: [
-                                      Container(
-                                        color: const Color(0xffFF0063),
-                                        height:
-                                            MediaQuery.of(context).size.height /
-                                                5,
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        child: Center(
-                                          child: Text(
-                                              state.view!.data![index].service!,
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20)),
+                                      InkWell(
+                                        child: Container(
+                                          color: const Color(0xffFF0063),
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              5,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2,
+                                          child: Center(
+                                            child: Text(
+                                                state.view!.data![index]
+                                                    .service!,
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20)),
+                                          ),
                                         ),
+                                        onTap: () async {
+                                          print('tap');
+                                          await showDialog(
+                                              context: context,
+                                              builder: (context) => AlertDialog(
+                                                    title: Text("Delete?"),
+                                                    actions: [
+                                                      MaterialButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text("No"),
+                                                      ),
+                                                      MaterialButton(
+                                                          onPressed: () {
+                                                            BlocProvider.of<
+                                                                        RemoveServiceBloc>(
+                                                                    context)
+                                                                .add(CheckRemoveService(
+                                                                    id: state
+                                                                        .view!
+                                                                        .data![
+                                                                            index]
+                                                                        .id!));
+                                                          },
+                                                          child: BlocConsumer<
+                                                              RemoveServiceBloc,
+                                                              RemoveServiceState>(
+                                                            builder: (context,
+                                                                state) {
+                                                              return Text(
+                                                                "Yes",
+                                                              );
+                                                            },
+                                                            listener: (context,
+                                                                state) {
+                                                              if (state
+                                                                  is RemoveServiceChecked) {
+                                                                BlocProvider.of<
+                                                                            ViewServicesBloc>(
+                                                                        context)
+                                                                    .add(
+                                                                        CheckViewServices());
+                                                                Navigator.pop(
+                                                                    context);
+                                                                Navigator.pop(
+                                                                    context);
+                                                              } else if (state
+                                                                  is RemoveServiceError) {
+                                                                Navigator.pop(
+                                                                    context);
+                                                                Fluttertoast
+                                                                    .showToast(
+                                                                  msg: state
+                                                                      .error,
+                                                                );
+                                                              } else if (state
+                                                                  is CheckingRemoveService) {
+                                                                Loading
+                                                                    .showLoading(
+                                                                        context);
+                                                              }
+                                                            },
+                                                          ))
+                                                    ],
+                                                  ));
+                                        },
                                       ),
                                     ],
                                   )),
@@ -177,19 +335,22 @@ class _AdminHomeState extends State<AdminHome> {
               }),
             ],
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
           floatingActionButton: SpeedDial(
             animatedIcon: AnimatedIcons.menu_close,
             children: [
               SpeedDialChild(
                 child: Icon(Icons.add),
                 label: "Service",
-                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> AddStaff())),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddService())),
               ),
               SpeedDialChild(
                 child: Icon(Icons.add),
                 label: "Staff",
-                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> AddStaff())),
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AddStaff())),
               )
             ],
           ),
@@ -198,38 +359,34 @@ class _AdminHomeState extends State<AdminHome> {
             color: Color(0xffFF0063),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height/12,
+              height: MediaQuery.of(context).size.height / 12,
               child: Row(
                 children: [
                   Spacer(),
                   MaterialButton(
                     color: Color(0xffFF0063),
-                    onPressed: (){
+                    onPressed: () {
                       BlocProvider.of<LogOutBloc>(context).add(CheckLOGOUT());
                     },
                     child: BlocConsumer<LogOutBloc, LogOutState>(
                       builder: (context, state) {
-
                         return Text(
                           "Logout",
-                          style: TextStyle(
-                              fontSize: 20, color: Colors.white),
+                          style: TextStyle(fontSize: 20, color: Colors.white),
                         );
-
                       },
                       listener: (context, state) {
                         if (state is LogoutChecked) {
                           Navigator.pop(context);
-                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              Login()), (Route<dynamic> route) => false);
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (context) => Login()),
+                              (Route<dynamic> route) => false);
                         } else if (state is LogoutError) {
                           Navigator.pop(context);
                           Fluttertoast.showToast(
-
                             msg: state.error,
                           );
-                        }
-                        else if(state is CheckingLogout){
+                        } else if (state is CheckingLogout) {
                           Loading.showLoading(context);
                         }
                       },
@@ -239,7 +396,6 @@ class _AdminHomeState extends State<AdminHome> {
               ),
             ),
           ),
-        )
-    );
+        ));
   }
 }

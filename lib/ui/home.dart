@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
                     return Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(6, 20, 6, 4),
+                          padding: const EdgeInsets.all(8.0),
                           child: Card(
                               color: Colors.white70,
                               elevation: 15,
@@ -61,19 +61,27 @@ class _HomeState extends State<Home> {
                                     color: const Color(0xffFF0063),
                                     height:
                                     MediaQuery.of(context).size.height / 5,
-                                    width: MediaQuery.of(context).size.width / 2,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                            state.viewBooking!.data![index].date!,
-                                            style: const TextStyle(
-                                                color: Colors.white, fontSize: 20)),
-                                        Spacer(),
-                                        Text(
-                                            state.viewBooking!.data![index].time!.start!,
-                                            style: const TextStyle(
-                                                color: Colors.white, fontSize: 20)),
-                                      ],
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text(state.viewBooking!.data![index].role!,
+                                              style: const TextStyle(
+                                                  color: Colors.white, fontSize: 20)),
+                                          SizedBox(height: 10),
+                                          Text(
+                                              state.viewBooking!.data![index].date!,
+                                              style: const TextStyle(
+                                                  color: Colors.white, fontSize: 14)),
+                                          SizedBox(height: 10),
+                                          // Spacer(),
+                                          Text(
+                                              state.viewBooking!.data![index].time!.start!,
+                                              style: const TextStyle(
+                                                  color: Colors.white, fontSize: 20)),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
