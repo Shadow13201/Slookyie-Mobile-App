@@ -18,14 +18,6 @@ const bookingModelSchema = new mongoose.Schema({
         //type:Date
         type:String
     },
-    time:{
-        start:{
-            type:String
-        },
-        end:{
-            type:String
-        },
-    },
     role:{
         type:String,
         default:"booked"

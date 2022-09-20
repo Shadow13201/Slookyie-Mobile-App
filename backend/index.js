@@ -12,6 +12,7 @@ const userRoute=require('./routes/userRoute');
 const serviceRoute=require('./routes/serviceRoute');
 const bookingRoute=require('./routes/bookingRoute');
 const staffRoute=require('./routes/staffRoute')
+const slotRoute=require('./routes/slotRoute')
 
 var app=express();
 app.use(cors());
@@ -76,6 +77,7 @@ app.use(userRoute)
 app.use(serviceRoute)
 app.use(bookingRoute)
 app.use(staffRoute)
+app.use(slotRoute)
 
 app.get('/health', async (req, res) => {
     res.send({

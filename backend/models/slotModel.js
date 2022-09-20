@@ -2,21 +2,18 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 var SchemaTypes = mongoose.Schema.Types;
 
-const serviceModelScheme=new mongoose.Schema
+const slotModelScheme=new mongoose.Schema
 ({
-    serviceId:{
+    slotId:{
         type:String
     },
     
-    service:{
+    slot:{
         type:String
-    },
-    cost:{
-        type:Number
     },
     role:{
         type:String,
-        default:'service'
+        default:"slot"
     }
 })
-module.exports = mongoose.model("serviceModel", serviceModelScheme);
+module.exports = mongoose.model("slotModel", slotModelScheme);

@@ -11,7 +11,7 @@ var jwt = require('jsonwebtoken');
 router.post('/addService/admin',adminAuth,async(req,res)=>{
     try 
     {
-        var{service}=req.body;
+        var{service,cost}=req.body;
         if(service==null || service== undefined)
         {
             res.status(200).json({
@@ -21,8 +21,18 @@ router.post('/addService/admin',adminAuth,async(req,res)=>{
             return;
         }
 
+        if(cost==null || cost== undefined)
+        {
+            res.status(200).json({
+                status:false,
+                msg:'Enter cost'
+            });
+            return;
+        }
+
         var d= new serviceModel({
             service:service,
+            cost:cost,
             role:'service'
         })
         await d.save()

@@ -21,7 +21,7 @@ router.post('/book/services',userAuth,async(req,res)=>{
            });
            return;
         } 
-     var{serviceId,date,time}=req.body;
+     var{serviceId,date}=req.body;
      var id=req.user.id;
      console.log(id)
      if(serviceId==null || serviceId==undefined)
@@ -40,14 +40,7 @@ router.post('/book/services',userAuth,async(req,res)=>{
         });
         return;
      }  
-     if(time==null || time==undefined )
-     {
-        res.status(200).json({
-            status:false,
-            msg:"Time not provided"
-        });
-        return;
-     } 
+     
      var task=await serviceModel.findOne({_id:serviceId})
      if(task==null || task==undefined)
      {
@@ -61,8 +54,7 @@ router.post('/book/services',userAuth,async(req,res)=>{
      data.UserId=req.user.id
      data.serviceId=serviceId
      data.date=date
-     data.time.start=time.start
-     data.time.end=time.end
+  
      await data.save()
 
      res.status(200).json({
@@ -84,7 +76,48 @@ router.post('/book/services',userAuth,async(req,res)=>{
 })
 
 //view booking
-router.get('/view/Booking',async(req,res)=>
+router.get('/viewservice/Booked',userAuth,async(req,res)=>
+{
+    try 
+    {
+        var Id=req.user.id;
+        if(Id==null || Id==undefined)
+        {
+            res.status(200).json({
+                status:false,
+                msg:"userid not found"
+            })
+            return;  
+        }
+        var data=await bookingModel.find({UserId:Id,role:'booked'})
+        if(data==null || data==undefined)
+        {
+            res.status(200).json({
+                status:false,
+                msg:"data not found"
+            })
+            return;  
+        }
+        res.status(200).json({
+            status:true,
+            msg:"Services Viewed",
+            data:data
+        })
+        return;
+    } 
+    catch (error) 
+    {
+        console.log(error)
+        res.status(500).json({
+            status:false,
+            msg:"Internal Server Error"
+         });
+         return;   
+    }
+})
+
+//view all booked services
+router.get('/view/Booked',async(req,res)=>
 {
     try 
     {
@@ -99,7 +132,7 @@ router.get('/view/Booking',async(req,res)=>
         }
         res.status(200).json({
             status:true,
-            msg:"Services Viewed",
+            msg:"Booked services Viewed",
             data:data
         })
         return;
