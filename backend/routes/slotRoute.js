@@ -51,11 +51,30 @@ router.post('/time/slot',adminAuth,async(req,res)=>{
 router.get('/view/slots',async(req,res)=>{
     try 
     {
-     var data= await slotModel.find({})   
-    } 
+     var data = await slotModel.find({role:'slot'})  
+     if(data==null || data==undefined)
+        {
+            res.status(200).json({
+                status:false,
+                msg:"data not found"
+            })
+            return;  
+        }
+        res.status(200).json({
+            status:true,
+            msg:"",
+            data:data
+        })
+        return;
+    }  
     catch (err) 
     {
-        
+        console.log(error)
+        res.status(500).json({
+            status:false,
+            msg:"Internal Server Error"
+         });
+         return;   
     }
 })
 
