@@ -4,6 +4,9 @@ var SchemaTypes = mongoose.Schema.Types;
 
 const slotModelScheme=new mongoose.Schema
 ({
+    UserId:{
+        type:mongoose.Schema.Types.ObjectId,ref:"userModel"
+    },
     slotId:{
         type:String
     },

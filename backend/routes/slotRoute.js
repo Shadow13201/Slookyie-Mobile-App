@@ -62,7 +62,7 @@ router.get('/view/slots',async(req,res)=>{
         }
         res.status(200).json({
             status:true,
-            msg:"",
+            msg:"Slots viewed",
             data:data
         })
         return;
@@ -77,5 +77,8 @@ router.get('/view/slots',async(req,res)=>{
          return;   
     }
 })
+
+
+
 
 module.exports=router;

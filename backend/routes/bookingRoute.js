@@ -21,7 +21,7 @@ router.post('/book/services',userAuth,async(req,res)=>{
            });
            return;
         } 
-     var{serviceId,date}=req.body;
+     var{serviceId,date,slot}=req.body;
      var id=req.user.id;
      console.log(id)
      if(serviceId==null || serviceId==undefined)
@@ -39,6 +39,14 @@ router.post('/book/services',userAuth,async(req,res)=>{
             msg:"Date not provided"
         });
         return;
+     } 
+     if(slot==null || slot==undefined)
+     {
+      res.status(200).json({
+          status:false,
+          msg:"Select slot"
+      });
+      return;
      }  
      
      var task=await serviceModel.findOne({_id:serviceId})
@@ -57,10 +65,17 @@ router.post('/book/services',userAuth,async(req,res)=>{
   
      await data.save()
 
+     var t=new slotModel()
+     data.slot=slot
+     data.role='slot booked'
+
+     await t.save()
+
      res.status(200).json({
         status:true,
         msg:"Booking successfull",
-        data:data
+        data:data,
+        data2:t
      });
      return;
     } 
@@ -93,15 +108,27 @@ router.get('/viewservice/Booked',userAuth,async(req,res)=>
         if(data==null || data==undefined)
         {
             res.status(200).json({
-                status:false,
+                status:false, 
                 msg:"data not found"
             })
             return;  
         }
+
+        var t=await slotModel.find({UserId:Id,role:'slot booked'})
+        if(t==null || t==undefined)
+        {
+            res.status(200).json({
+                status:false, 
+                msg:"data2 not found"
+            })
+            return;  
+        }
+
         res.status(200).json({
             status:true,
             msg:"Services Viewed",
-            data:data
+            data:data,
+            data2:t
         })
         return;
     } 
