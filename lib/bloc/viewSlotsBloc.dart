@@ -16,16 +16,16 @@ class ViewSlotsBloc extends Bloc<ViewSlotsEvent, ViewSlotsState> {
   Future<FutureOr<void>>
   _CheckViewSlots(
       CheckViewSlots event, Emitter<ViewSlotsState> emit) async {
-    ViewSlotsModel view;
+    ViewSlotsModel viewslt;
     emit(CheckingViewSlots());
 
-    view = await Repository().viewSlots(url: '/view/slots');
-    if (view.status == true) {
+    viewslt = await Repository().viewSlots(url: '/view/slots');
+    if (viewslt.status == true) {
       // await TempStorage.addToken(WardModel.token.toString());
       // print(WardModel.token.toString());
-      emit(ViewSlotsChecked(view));
+      emit(ViewSlotsChecked(viewslt));
     } else {
-      emit(ViewSlotsError(error: view.msg.toString()));
+      emit(ViewSlotsError(error: viewslt.msg.toString()));
     }
   }
 }
@@ -52,8 +52,8 @@ class ViewSlotsState extends Equatable {
 
 class CheckingViewSlots extends ViewSlotsState {}
 class ViewSlotsChecked extends ViewSlotsState {
-  final ViewSlotsModel? view;
-  ViewSlotsChecked(this.view);
+  final ViewSlotsModel? viewslt;
+  ViewSlotsChecked(this.viewslt);
 }
 
 class ViewSlotsError extends ViewSlotsState {

@@ -66,7 +66,7 @@ class _ServicesState extends State<Services> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Slots(
+                            builder: (context) => Booking(serviceId: state.view!.data![index].id!,
                                 // serviceId: state.view!.data![index].id!
                             )));
                   },

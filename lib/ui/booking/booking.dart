@@ -4,6 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slookyie_max/bloc/bookingBloc.dart';
 import 'package:slookyie_max/ui/home.dart';
 
+import '../../bloc/viewSlotsBloc.dart';
+
 class Booking extends StatefulWidget {
   final String serviceId;
 
@@ -58,17 +60,35 @@ class _BookingState extends State<Booking> {
               color: Colors.black,
               thickness: 2,
             ),
-            Spacer(),
-            ListView.builder(
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index){
-                return Column(
-                  children: [
-                    MaterialButton(
-                      height: ,
-                    )
-                  ],
-                );
+            BlocBuilder<ViewSlotsBloc, ViewSlotsState>(
+              builder: (context, state) {
+                if (state is ViewSlotsChecked){
+                  return ListView.builder(
+                    itemCount: state.viewslt!.data!.length,
+                    shrinkWrap: true,
+                    itemBuilder: (BuildContext context, int index){
+                      return Column(
+                        children: [
+                          MaterialButton(
+                              child: Text(state.viewslt!.data![index].slot!),
+                              color: Colors.blue,
+                              height: 10,
+                              minWidth: 10,
+                              onPressed: (){}),
+                        ],
+                      );
+                    },
+                  );
+                } else if (state is CheckingViewSlots) {
+                  return const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.pinkAccent,
+                      ));
+                } else {
+                  return const Center(
+                    child: Text("error"),
+                  );
+                }
               },
             ),
             MaterialButton(

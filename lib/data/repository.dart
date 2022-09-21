@@ -151,8 +151,8 @@ class Repository {
       );
     }
     final dynamic response = await WebClient.get(url);
-    final ViewSlotsModel view = ViewSlotsModel.fromJson(response);
-    return view;
+    final ViewSlotsModel viewslt = ViewSlotsModel.fromJson(response);
+    return viewslt;
   }
 
   Future<ViewStaffModel> viewStaff({required String url}) async {

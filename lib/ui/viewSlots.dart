@@ -57,7 +57,7 @@ class _SlotsState extends State<Slots> {
                     crossAxisCount: 2,
                     childAspectRatio: 0.9,
                   ),
-                  itemCount: state.view!.data!.length,
+                  itemCount: state.viewslt!.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onTap: () {},
@@ -83,7 +83,7 @@ class _SlotsState extends State<Slots> {
                                       MediaQuery.of(context).size.width / 2,
                                       child: Center(
                                         child: Text(
-                                            state.view!.data![index].slot!,
+                                            state.viewslt!.data![index].slot!,
                                             style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20)),
