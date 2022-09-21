@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:slookyie_max/data/models/ViewBookingModel.dart';
 import 'package:slookyie_max/data/models/bookingModel.dart';
 import 'package:slookyie_max/data/models/regModel.dart';
 import 'package:slookyie_max/data/webclient.dart';
@@ -11,6 +10,7 @@ import 'models/addServiceModel.dart';
 import 'models/addStaffModel.dart';
 import 'models/removeServiceModel.dart';
 import 'models/removeStaffModel.dart';
+import 'models/viewBookingModel.dart';
 import 'models/viewServicesModel.dart';
 import 'models/viewSlotsModel.dart';
 import 'models/viewStaffModel.dart';

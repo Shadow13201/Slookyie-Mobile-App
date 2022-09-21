@@ -32,23 +32,23 @@ class ViewBookingModel {
 
 class Data {
   Data({
-      this.time, 
       this.id, 
+      this.time, 
       this.role, 
       this.serviceId, 
       this.date, 
       this.v,});
 
   Data.fromJson(dynamic json) {
-    time = json['time'] != null ? Time.fromJson(json['time']) : null;
     id = json['_id'];
+    time = json['time'] != null ? Time.fromJson(json['time']) : null;
     role = json['role'];
     serviceId = json['serviceId'];
     date = json['date'];
     v = json['__v'];
   }
-  Time? time;
   String? id;
+  Time? time;
   String? role;
   String? serviceId;
   String? date;
@@ -56,10 +56,10 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['_id'] = id;
     if (time != null) {
       map['time'] = time?.toJson();
     }
-    map['_id'] = id;
     map['role'] = role;
     map['serviceId'] = serviceId;
     map['date'] = date;
