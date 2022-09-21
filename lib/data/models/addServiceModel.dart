@@ -28,17 +28,20 @@ class AddServiceModel {
 class Data {
   Data({
       this.service, 
+      this.cost, 
       this.role, 
       this.id, 
       this.v,});
 
   Data.fromJson(dynamic json) {
     service = json['service'];
+    cost = json['cost'];
     role = json['role'];
     id = json['_id'];
     v = json['__v'];
   }
   String? service;
+  int? cost;
   String? role;
   String? id;
   int? v;
@@ -46,6 +49,7 @@ class Data {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['service'] = service;
+    map['cost'] = cost;
     map['role'] = role;
     map['_id'] = id;
     map['__v'] = v;

@@ -20,6 +20,7 @@ class AddServiceBloc extends Bloc<AddServiceEvent, AddServiceState> {
 
     Map data = {
       "service": event.service,
+      "cost": event.cost,
 
     };
     addServiceModel = await Repository().addService(url: '/addService/admin', data: data);
@@ -39,8 +40,8 @@ class AddServiceEvent extends Equatable {
 
 
 class CheckAddService extends AddServiceEvent {
-  final String  service;
-  CheckAddService({required this.service
+  final String  service,cost;
+  CheckAddService({required this.service,required this.cost
   });
 }
 class ShowProfile extends AddServiceEvent{}

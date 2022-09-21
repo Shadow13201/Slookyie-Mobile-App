@@ -40,229 +40,217 @@ class _LoginState extends State<Login> {
       body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          // alignment: Alignment(0.0, 2.5),
-          // child: CircleAvatar(
-          //   backgroundColor: Color(0xff6998AB),
-          //   // child: Icon(
-          //   //   Icons.person,
-          //   //   size: 80,
-          //   // ),
-          //   backgroundImage: AssetImage("assets/icon.png"),
-          //   radius: 70.0,
-          // ),
-          //       decoration: new BoxDecoration(
-          //              image: new DecorationImage(
-          //              image: ExactAssetImage('assets/icon.png',),
-          //              fit: BoxFit.fitHeight,
-          //            ),
-          // ),
-
           child: SingleChildScrollView(
-            child: Column(children: [
-              const SizedBox(height: 160),
-              const Text(
-                'SLOOKYIE ',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 55, color: Colors.white, fontFamily: "fontStyle"),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Saloon Booking  ',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 20, color: Colors.white, fontFamily: "fontStyle"),
-              ),
-              const SizedBox(height: 120),
-              const Text(
-                'Please login to Continue',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white, fontSize: 18, fontFamily: "fontStyle"),
-              ),
-              Row(
-                children: const [
-                  SizedBox(
-                    width: 60,
-                    height: 20,
-                  ),
-                  Text(
-                    'Username',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
-                        color: Colors.white, fontSize: 9, fontFamily: "fontS"),
-                  ),
-                ],
-              ),
-              Container(
-                width: 290,
-                height: 44,
-                child: TextField(
-                  controller: emailController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    //suffixIcon: Image.asset("assets/tick.png"),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      gapPadding: 4.0,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                      gapPadding: 4.0,
-                    ),
-                  ),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 14),
+              child: Column(children: [
+                const SizedBox(height: 100),
+                const Text(
+                  'SLOOKYIE ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 55, color: Colors.white, fontFamily: "fontStyle"),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: const [
-                  SizedBox(
-                    width: 60,
-                    height: 20,
-                  ),
-                  Text(
-                    'Password',
-                    style: TextStyle(
-                        color: Colors.white, fontSize: 9, fontFamily: "fontS"),
-                  ),
-                ],
-              ),
-              Container(
-                width: 290,
-                height: 44,
-                child: TextField(
-                  controller: passwordController,
-                  obscureText: _isObscure,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isObscure ? Icons.visibility : Icons.visibility_off,
+                const SizedBox(height: 10),
+                const Text(
+                  'Saloon Booking  ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20, color: Colors.white, fontFamily: "fontStyle"),
+                ),
+                const SizedBox(height: 100),
+                const Text(
+                  'Please login to Continue',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 18, fontFamily: "fontStyle"),
+                ),
+                SizedBox(height: 40,),
+                Row(
+                  children: const [
+                    SizedBox(
+                      width: 60,
+                      height: 20,
+                    ),
+                    Text(
+                      'Username',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 16, fontFamily: "fontS"),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: 290,
+                  height: 44,
+                  child: TextField(
+                    controller: emailController,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: const InputDecoration(
+                      //suffixIcon: Image.asset("assets/tick.png"),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        gapPadding: 4.0,
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _isObscure = !_isObscure;
-                        });
-                      },
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                        gapPadding: 4.0,
+                      ),
                     ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(5.0)),
-                      gapPadding: 4.0,
-                    ),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(5.0)),
-                      gapPadding: 4.0,
-                    ),
-                    // hintText: 'USERNAME',
-                    //labelText: 'USERNAME',
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: 290,
-                height: 44,
-                child: MaterialButton(
-                  color: Colors.white,
+                const SizedBox(
                   height: 10,
-                  minWidth: MediaQuery.of(context).size.width * .36,
-                  // minWidth:MediaQuery.of(context).size.height*.36,
-                  onPressed: () {
-                    // Navigator.push(context,
-                    //           MaterialPageRoute(builder: (context) => Services()));
-                    BlocProvider.of<AuthBloc>(context).add(
-                        CheckOTP(
-                      email: emailController.text,
-                      password: passwordController.text,
-                    ));
-                    // if(emailController.text=="seb@gmail.com"){
-                    //   Navigator.push(context,
-                    //       MaterialPageRoute(builder: (context) => Services()));
-                    // }
-                    // else{
-                    //   Fluttertoast.showToast(msg: "Invalid");
-                    // }
-                  },
-                  child: BlocConsumer<AuthBloc, AuthState>(
-                    builder: (context, state) {
-                      if(state is CheckingOtp){
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      else{
-                        return Text("Log in");
-                      }
+                ),
+                Row(
+                  children: const [
+                    SizedBox(
+                      width: 60,
+                      height: 20,
+                    ),
+                    Text(
+                      'Password',
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 16, fontFamily: "fontS"),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: 290,
+                  height: 44,
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: _isObscure,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        },
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(5.0)),
+                        gapPadding: 4.0,
+                      ),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius:
+                            BorderRadius.all(Radius.circular(5.0)),
+                        gapPadding: 4.0,
+                      ),
+                      // hintText: 'USERNAME',
+                      //labelText: 'USERNAME',
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 290,
+                  height: 44,
+                  child: MaterialButton(
+                    color: Colors.white,
+                    height: 10,
+                    minWidth: MediaQuery.of(context).size.width * .36,
+                    // minWidth:MediaQuery.of(context).size.height*.36,
+                    onPressed: () {
+                      // Navigator.push(context,
+                      //           MaterialPageRoute(builder: (context) => Services()));
+                      BlocProvider.of<AuthBloc>(context).add(
+                          CheckOTP(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      ));
+                      // if(emailController.text=="seb@gmail.com"){
+                      //   Navigator.push(context,
+                      //       MaterialPageRoute(builder: (context) => Services()));
+                      // }
+                      // else{
+                      //   Fluttertoast.showToast(msg: "Invalid");
+                      // }
                     },
-                    listener: (context,state){
-                      if(state is OtpChecked){
-                        Fluttertoast.showToast(msg: "Logged in");
-                        if(state.role == 'user'){
-                          {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              Services()), (Route<dynamic> route) => false);}}
+                    child: BlocConsumer<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        if(state is CheckingOtp){
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
                         }
-                      else if (state.role == 'admin'){
-                          {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                              AdminHome()), (Route<dynamic> route) => false);}}
+                        else{
+                          return Text("Log in",
+                          style: TextStyle(color: Color(0XFFff0063)));
                         }
-                        // Navigator.pushAndRemoveUntil(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => const Services()),
-                        //         (Route<dynamic> route) => false);
+                      },
+                      listener: (context,state){
+                        if(state is OtpChecked){
+                          Fluttertoast.showToast(msg: "Logged in");
+                          if(state.role == 'user'){
+                            {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                Services()), (Route<dynamic> route) => false);}}
+                          }
+                        else if (state.role == 'admin'){
+                            {{Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                AdminHome()), (Route<dynamic> route) => false);}}
+                          }
+                          // Navigator.pushAndRemoveUntil(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => const Services()),
+                          //         (Route<dynamic> route) => false);
+                        }
+                        else if (state is OtpError){
+                          Fluttertoast.showToast(msg: state.error);
+                        }
                       }
-                      else if (state is OtpError){
-                        Fluttertoast.showToast(msg: state.error);
-                      }
-                    }
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text(
-                "Don't have an account ?",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: 290,
-                height: 44,
-                child: MaterialButton(
-                  color: const Color(0xffFFFFFF),
-                  height: 10,
-                  minWidth: MediaQuery.of(context).size.width * .36,
-                  // minWidth:MediaQuery.of(context).size.height*.36,
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignUP()));
-                  },
-                  child: const Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      color: Color(0XFFff0063),
                     ),
                   ),
                 ),
-              ),
-            ]),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  "Don't have an account ?",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  width: 290,
+                  height: 44,
+                  child: MaterialButton(
+                    color: const Color(0xffFFFFFF),
+                    height: 10,
+                    minWidth: MediaQuery.of(context).size.width * .36,
+                    // minWidth:MediaQuery.of(context).size.height*.36,
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => SignUP()));
+                    },
+                    child: const Text(
+                      "Sign Up",
+                      style: TextStyle(
+                        color: Color(0XFFff0063),
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+            ),
           )),
     );
   }
