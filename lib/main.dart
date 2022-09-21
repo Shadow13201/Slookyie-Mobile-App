@@ -15,6 +15,7 @@ import 'bloc/removeServiceBloc.dart';
 import 'bloc/removeStaffBloc.dart';
 import 'bloc/viewBookingBloc.dart';
 import 'bloc/viewServicesBloc.dart';
+import 'bloc/viewSlotsBloc.dart';
 import 'bloc/viewStaffBloc.dart';
 import 'helper/sharedpreferences.dart';
 
@@ -46,6 +47,7 @@ class _AppHomeState extends State<AppHome> {
         BlocProvider<RemoveServiceBloc>(create: (context) => RemoveServiceBloc()),
         BlocProvider<RemoveStaffBloc>(create: (context) => RemoveStaffBloc()),
         BlocProvider<ViewServicesBloc>(create: (context) => ViewServicesBloc()),
+        BlocProvider<ViewSlotsBloc>(create: (context) => ViewSlotsBloc()),
         BlocProvider<BookingBloc>(create: (context) => BookingBloc()),
         BlocProvider<ViewBookingBloc>(create: (context) => ViewBookingBloc()),
         BlocProvider<ViewStaffBloc>(create: (context) => ViewStaffBloc()),

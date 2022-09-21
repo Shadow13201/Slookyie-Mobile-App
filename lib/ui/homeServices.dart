@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slookyie_max/bloc/viewServicesBloc.dart';
 import 'package:slookyie_max/ui/home.dart';
 import 'package:slookyie_max/ui/userHome.dart';
+import 'package:slookyie_max/ui/viewSlots.dart';
 
 import '../bloc/logoutUserBloc.dart';
 import '../loadingscreen.dart';
@@ -65,8 +66,9 @@ class _ServicesState extends State<Services> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Booking(
-                                serviceId: state.view!.data![index].id!)));
+                            builder: (context) => Slots(
+                                // serviceId: state.view!.data![index].id!
+                            )));
                   },
                   child: Column(
                     children: [

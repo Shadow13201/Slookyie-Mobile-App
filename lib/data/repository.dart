@@ -12,6 +12,7 @@ import 'models/addStaffModel.dart';
 import 'models/removeServiceModel.dart';
 import 'models/removeStaffModel.dart';
 import 'models/viewServicesModel.dart';
+import 'models/viewSlotsModel.dart';
 import 'models/viewStaffModel.dart';
 
 class Repository {
@@ -137,6 +138,20 @@ class Repository {
     }
     final dynamic response = await WebClient.get(url);
     final ViewServicesModel view = ViewServicesModel.fromJson(response);
+    return view;
+  }
+
+  Future<ViewSlotsModel> viewSlots({required String url}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.get(url);
+    final ViewSlotsModel view = ViewSlotsModel.fromJson(response);
     return view;
   }
 
