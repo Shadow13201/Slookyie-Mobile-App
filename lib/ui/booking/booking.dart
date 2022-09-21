@@ -23,6 +23,8 @@ class _BookingState extends State<Booking> {
   DateTime? _dateTimeon;
 
   void initState() {
+    BlocProvider.of<ViewSlotsBloc>(context).add(CheckViewSlots());
+    setState(() {});
     super.initState();
   }
 
@@ -74,7 +76,9 @@ class _BookingState extends State<Booking> {
                               color: Colors.blue,
                               height: 10,
                               minWidth: 10,
-                              onPressed: (){}),
+                              onPressed: (){
+                                var selectedslot = state.viewslt!.data![index].slot!;
+                              }),
                         ],
                       );
                     },
@@ -99,7 +103,7 @@ class _BookingState extends State<Booking> {
                 if(_dateTimeon != null){BlocProvider.of<BookingBloc>(context).add(CheckOTP(
                     date: "${_dateTimeon!.day}/${_dateTimeon!.month}/${_dateTimeon!.year}",
                     services: widget.serviceId,
-                    slot: ''
+                    slot: selectedslot
                 )
                 );}
                 else{
