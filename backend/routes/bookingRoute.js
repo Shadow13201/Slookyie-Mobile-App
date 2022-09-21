@@ -7,6 +7,7 @@ const userAuth=require('../middleware/userAuth')
 const adminAuth=require('../middleware/adminAuth')
 var bcrypt=require('bcryptjs');
 var jwt = require('jsonwebtoken');
+const slotModel=require('../models/slotModel');
 
 //Book services
 router.post('/book/services',userAuth,async(req,res)=>{
