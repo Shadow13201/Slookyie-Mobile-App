@@ -30,6 +30,7 @@ class _BookingState extends State<Booking> {
 
   @override
   Widget build(BuildContext context) {
+    String? selectedslot;
     return Scaffold(
       appBar: AppBar(
         title: Text("Booking"),
@@ -77,7 +78,7 @@ class _BookingState extends State<Booking> {
                               height: 10,
                               minWidth: 10,
                               onPressed: (){
-                                var selectedslot = state.viewslt!.data![index].slot!;
+                                selectedslot = state.viewslt!.data![index].slot!;
                               }),
                         ],
                       );
@@ -103,7 +104,7 @@ class _BookingState extends State<Booking> {
                 if(_dateTimeon != null){BlocProvider.of<BookingBloc>(context).add(CheckOTP(
                     date: "${_dateTimeon!.day}/${_dateTimeon!.month}/${_dateTimeon!.year}",
                     services: widget.serviceId,
-                    slot: selectedslot
+                    slot: selectedslot!
                 )
                 );}
                 else{
