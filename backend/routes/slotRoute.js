@@ -69,7 +69,7 @@ router.get('/view/slots',async(req,res)=>{
     }  
     catch (err) 
     {
-        console.log(error)
+        console.log(err)
         res.status(500).json({
             status:false,
             msg:"Internal Server Error"
