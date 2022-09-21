@@ -14,16 +14,10 @@ class Booking extends StatefulWidget {
 }
 
 class _BookingState extends State<Booking> {
-  // var _dateTimefrom = TextEditingController();
-  // var _dateTimeto = TextEditingController();
-  // var _dateTimeon = TextEditingController();
 
-  TimeOfDay start = TimeOfDay(hour: 10, minute: 10);
-  TimeOfDay end = TimeOfDay(hour: 10, minute: 10);
+
   DateTime defdate = DateTime(2022, 10, 8);
 
-  TimeOfDay? _dateTimeto;
-  TimeOfDay? _dateTimefrom;
   DateTime? _dateTimeon;
 
   void initState() {
@@ -64,51 +58,28 @@ class _BookingState extends State<Booking> {
               color: Colors.black,
               thickness: 2,
             ),
-            Text("Select Time"),
-            Row(
-              children: [
-                Text("From"),
-                SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                  child: Text("${start.hour}:${start.minute}"),
-                  onPressed: () async {
-                    _dateTimefrom=await showTimePicker(context: context, initialTime: start);
-                    if (_dateTimefrom == null) return;
-                    else{
-                      setState(() => start = _dateTimefrom as TimeOfDay);
-                    }
-                  },
-                ),
-                Spacer(),
-                Text("To"),
-                SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                  child: Text("${end.hour}:${end.minute}"),
-                  onPressed: () async {
-                    _dateTimeto=await showTimePicker(context: context, initialTime: end);
-                    if (_dateTimeto == null) return;
-                    else{
-                      setState(() => end = _dateTimeto as TimeOfDay);
-                    }
-                  },
-                ),
-              ],
-            ),
             Spacer(),
+            ListView.builder(
+              itemCount: 10,
+              itemBuilder: (BuildContext context, int index){
+                return Column(
+                  children: [
+                    MaterialButton(
+                      height: ,
+                    )
+                  ],
+                );
+              },
+            ),
             MaterialButton(
               color: Color(0xffFF0063),
               minWidth: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 13,
               onPressed: () {
-                if(_dateTimefrom!= null && _dateTimeto !=null && _dateTimeon != null){BlocProvider.of<BookingBloc>(context).add(CheckOTP(
-                    start: "${_dateTimefrom!.hour}:${_dateTimefrom!.minute}",
-                    end: "${_dateTimeto!.hour}:${_dateTimeto!.minute}",
+                if(_dateTimeon != null){BlocProvider.of<BookingBloc>(context).add(CheckOTP(
                     date: "${_dateTimeon!.day}/${_dateTimeon!.month}/${_dateTimeon!.year}",
-                    services: widget.serviceId
+                    services: widget.serviceId,
+                    slot: ''
                 )
                 );}
                 else{
