@@ -238,13 +238,37 @@ class _AdminHomeState extends State<AdminHome> {
                                                   .size
                                                   .width /
                                               2,
-                                          child: Center(
-                                            child: Text(
-                                                state.view!.data![index]
-                                                    .service!,
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Column(
+                                              children: [
+                                                Center(
+                                                  child: Text(
+                                                      state.view!.data![index]
+                                                          .service!,
+                                                      style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20)),
+                                                ),
+                                                Spacer(),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Text("Rs:",style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20)),
+                                                      SizedBox(width: 5,),
+                                                      Text(state.view!.data![index].cost!.toString(),
+                                                          style: const TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20)
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         onTap: () async {

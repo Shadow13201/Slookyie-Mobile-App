@@ -14,6 +14,7 @@ class AddService extends StatefulWidget {
 
 class _AddServiceState extends State<AddService> {
   var serviceController = TextEditingController();
+  var costController = TextEditingController();
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -91,12 +92,63 @@ class _AddServiceState extends State<AddService> {
                 SizedBox(
                   height: 15,
                 ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 60,
+                      height: 20,
+                    ),
+                    Text(
+                      'Cost',
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 12, fontFamily: "fontS"),
+                    ),
+                  ],
+                ),
+                Container(
+                  width: 290,
+                  height: 44,
+                  child: TextFormField(
+                    controller: costController,
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+
+                      focusedBorder: OutlineInputBorder(
+                        borderSide:
+                        const BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(5.0)),
+                        gapPadding: 4.0,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide:
+                        const BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(5.0)),
+                        gapPadding: 4.0,
+                      ),
+                      // hintText: 'USERNAME',
+                      //labelText: 'USERNAME',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your name';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
                 MaterialButton(
                     onPressed: () =>
                     {
                       BlocProvider.of<AddServiceBloc>(context).add(
                           CheckAddService(
                             service: serviceController.text,
+                            cost: costController.text
                           )
                       )
                     },

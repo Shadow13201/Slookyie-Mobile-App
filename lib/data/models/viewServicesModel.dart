@@ -34,17 +34,20 @@ class Data {
   Data({
       this.id, 
       this.service, 
+      this.cost, 
       this.role, 
       this.v,});
 
   Data.fromJson(dynamic json) {
     id = json['_id'];
     service = json['service'];
+    cost = json['cost'];
     role = json['role'];
     v = json['__v'];
   }
   String? id;
   String? service;
+  int? cost;
   String? role;
   int? v;
 
@@ -52,6 +55,7 @@ class Data {
     final map = <String, dynamic>{};
     map['_id'] = id;
     map['service'] = service;
+    map['cost'] = cost;
     map['role'] = role;
     map['__v'] = v;
     return map;
