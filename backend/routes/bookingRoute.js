@@ -67,8 +67,8 @@ router.post('/book/services',userAuth,async(req,res)=>{
      await data.save()
 
      var t=new slotModel()
-     data.slot=slot
-     data.role='slot booked'
+     t.slot=slot
+     t.role="slot booked"
 
      await t.save()
 
@@ -173,6 +173,45 @@ router.get('/view/Booked',async(req,res)=>
             msg:"Internal Server Error"
          });
          return;   
+    }
+})
+
+//delete booking
+router.post('/delete/booking',async(req,res)=>{
+    try 
+    {
+       var {id}=req.body;
+       if(id==null || id==undefined){
+        res.status(200).json({
+            status:false,
+            msg:"id not  provided"
+        })
+        return;
+    }
+    var data=await bookingModel.findOneAndDelete({_id:id})
+    if(data==null || data==undefined){
+        res.status(200).json({
+            status:false,
+            msg:"Data not found"
+        })
+        return;
+    }
+
+        res.status(200).json({
+            status:true,
+            msg:"booking deleted",
+            data:data
+        })
+        return;
+    } 
+    catch (error) 
+    {
+      console.log(error)
+      res.status(500).json({
+       status:false,
+       msg:"Internal Server Error" 
+      }) 
+      return; 
     }
 })
 
