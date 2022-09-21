@@ -76,7 +76,7 @@ router.post('/book/services',userAuth,async(req,res)=>{
         status:true,
         msg:"Booking successfull",
         data:data,
-        data2:t
+        t:t
      });
      return;
     } 
