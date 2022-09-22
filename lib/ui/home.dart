@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slookyie_max/bloc/viewBookingBloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+import '../bloc/deleteBookingBloc.dart';
+import '../bloc/userViewBookingBloc.dart';
+import '../loadingscreen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,7 +16,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   void initState() {
     super.initState();
-    BlocProvider.of<ViewBookingBloc>(context).add(CheckViewBooking());
+    BlocProvider.of<UserViewBookingBloc>(context).add(CheckUserViewBooking());
     setState(() {});
   }
 
@@ -36,13 +40,13 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body: BlocBuilder<ViewBookingBloc, ViewBookingState>(
+      body: BlocBuilder<UserViewBookingBloc, UserViewBookingState>(
           builder: (context, state) {
-            if (state is ViewBookingChecked) {
+            if (state is UserViewBookingChecked) {
               return ListView.builder(
                 //physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: state.viewBooking!.data!.length,
+                  itemCount: state.userviewBooking!.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Column(
                       children: [
@@ -57,32 +61,92 @@ class _HomeState extends State<Home> {
                               ),
                               child: Column(
                                 children: [
-                                  Container(
-                                    color: const Color(0xffFF0063),
-                                    height:
-                                    MediaQuery.of(context).size.height / 5,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        children: [
-                                          Text(state.viewBooking!.data![index].role!,
-                                              style: const TextStyle(
-                                                  color: Colors.white, fontSize: 20)),
-                                          SizedBox(height: 10),
-                                          Text(
-                                              state.viewBooking!.data![index].date!,
-                                              style: const TextStyle(
-                                                  color: Colors.white, fontSize: 14)),
-                                          SizedBox(height: 10),
-                                          // Spacer(),
-                                          Text(
-                                              state.viewBooking!.data![index].time!.start!,
-                                              style: const TextStyle(
-                                                  color: Colors.white, fontSize: 20)),
-                                        ],
+                                  InkWell(
+                                    child: Container(
+                                      color: const Color(0xffFF0063),
+                                      height:
+                                      MediaQuery.of(context).size.height / 5,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            Text(state.userviewBooking!.data![index].role!,
+                                                style: const TextStyle(
+                                                    color: Colors.white, fontSize: 20)),
+                                            SizedBox(height: 10),
+                                            Text(
+                                                state.userviewBooking!.data![index].date!,
+                                                style: const TextStyle(
+                                                    color: Colors.white, fontSize: 14)),
+                                          ],
+                                        ),
                                       ),
                                     ),
+                                    onTap: () async {
+                                      print('tap');
+                                      await showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title: Text("Delete?"),
+                                            actions: [
+                                              MaterialButton(
+                                                onPressed: () {
+                                                  Navigator.pop(
+                                                      context);
+                                                },
+                                                child: Text("No"),
+                                              ),
+                                              MaterialButton(
+                                                  onPressed: () {
+                                                    BlocProvider.of<
+                                                        DeleteBookingBloc>(
+                                                        context)
+                                                        .add(CheckDeleteBooking(
+                                                        id: state.userviewBooking!.data![index].id!));
+                                                  },
+                                                  child: BlocConsumer<
+                                                      DeleteBookingBloc,
+                                                      DeleteBookingState>(
+                                                    builder: (context,
+                                                        state) {
+                                                      return Text(
+                                                        "Yes",
+                                                      );
+                                                    },
+                                                    listener: (context,
+                                                        state) {
+                                                      if (state
+                                                      is DeleteBookingChecked) {
+                                                        BlocProvider.of<
+                                                            UserViewBookingBloc>(
+                                                            context)
+                                                            .add(
+                                                            CheckUserViewBooking());
+                                                        Navigator.pop(
+                                                            context);
+                                                        Navigator.pop(
+                                                            context);
+                                                      } else if (state
+                                                      is DeleteBookingError) {
+                                                        Navigator.pop(
+                                                            context);
+                                                        Fluttertoast
+                                                            .showToast(
+                                                          msg: state
+                                                              .error,
+                                                        );
+                                                      } else if (state
+                                                      is CheckingDeleteBooking) {
+                                                        Loading
+                                                            .showLoading(
+                                                            context);
+                                                      }
+                                                    },
+                                                  ))
+                                            ],
+                                          ));
+                                    },
                                   ),
                                 ],
                               )),
@@ -90,7 +154,7 @@ class _HomeState extends State<Home> {
                       ],
                     );
                   });
-            } else if (state is CheckingViewBooking) {
+            } else if (state is CheckingUserViewBooking) {
               return const Center(
                   child: CircularProgressIndicator(
                     color: Colors.pinkAccent,

@@ -19,7 +19,7 @@ class ViewBookingBloc extends Bloc<ViewBookingEvent, ViewBookingState> {
     ViewBookingModel viewBoo;
     emit(CheckingViewBooking());
 
-    viewBoo = await Repository().viewBooking(url: '/view/booking');
+    viewBoo = await Repository().viewBooking(url: '/view/Booked');
     if (viewBoo.status == true) {
       // await TempStorage.addToken(WardModel.token.toString());
       // print(WardModel.token.toString());

@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slookyie_max/bloc/viewServicesBloc.dart';
 import 'package:slookyie_max/ui/home.dart';
-import 'package:slookyie_max/ui/userHome.dart';
-import 'package:slookyie_max/ui/viewSlots.dart';
 
 import '../bloc/logoutUserBloc.dart';
 import '../loadingscreen.dart';
@@ -85,17 +83,45 @@ class _ServicesState extends State<Services> {
                               children: [
                                 Container(
                                   color: const Color(0xffFF0063),
-                                  height:
-                                      MediaQuery.of(context).size.height /
-                                          5,
-                                  width:
-                                      MediaQuery.of(context).size.width / 2,
-                                  child: Center(
-                                    child: Text(
-                                        state.view!.data![index].service!,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20)),
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height /
+                                      5,
+                                  width: MediaQuery.of(context)
+                                      .size
+                                      .width /
+                                      2,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Column(
+                                      children: [
+                                        Center(
+                                          child: Text(
+                                              state.view!.data![index]
+                                                  .service!,
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20)),
+                                        ),
+                                        Spacer(),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              Text("Rs:",style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20)),
+                                              SizedBox(width: 5,),
+                                              Text(state.view!.data![index].cost!.toString(),
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20)
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],

@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:slookyie_max/data/models/bookingModel.dart';
+import 'package:slookyie_max/data/models/deleteBookingModel.dart';
 import 'package:slookyie_max/data/models/regModel.dart';
 import 'package:slookyie_max/data/webclient.dart';
 
@@ -10,6 +11,7 @@ import 'models/addServiceModel.dart';
 import 'models/addStaffModel.dart';
 import 'models/removeServiceModel.dart';
 import 'models/removeStaffModel.dart';
+import 'models/userViewBookingModel.dart';
 import 'models/viewBookingModel.dart';
 import 'models/viewServicesModel.dart';
 import 'models/viewSlotsModel.dart';
@@ -113,6 +115,20 @@ class Repository {
     return removeserviceModel;
   }
 
+  Future<DeleteBookingModel> postDeleteBooking({required String url,dynamic data}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.post(url,data);
+    final DeleteBookingModel deletebookingModel = DeleteBookingModel.fromJson(response);
+    return deletebookingModel;
+  }
+
   Future<RemoveStaffModel> postRemoveStaff({required String url,dynamic data}) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.none) {
@@ -181,5 +197,19 @@ class Repository {
     final dynamic response = await WebClient.get(url);
     final ViewBookingModel view = ViewBookingModel.fromJson(response);
     return view;
+  }
+
+  Future<UserViewBookingModel> userviewBooking({required String url}) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      Fluttertoast.showToast(
+        msg: "No internet connection",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+      );
+    }
+    final dynamic response = await WebClient.get(url);
+    final UserViewBookingModel userviewBooking = UserViewBookingModel.fromJson(response);
+    return userviewBooking;
   }
 }

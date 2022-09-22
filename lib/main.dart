@@ -7,12 +7,14 @@ import 'package:slookyie_max/ui/homeServices.dart';
 import 'package:slookyie_max/ui/login.dart';
 import 'bloc/addServiceBloc.dart';
 import 'bloc/bookingBloc.dart';
+import 'bloc/deleteBookingBloc.dart';
 import 'bloc/loginbloc.dart';
 import 'bloc/logoutBloc.dart';
 import 'bloc/logoutUserBloc.dart';
 import 'bloc/regBloc.dart';
 import 'bloc/removeServiceBloc.dart';
 import 'bloc/removeStaffBloc.dart';
+import 'bloc/userViewBookingBloc.dart';
 import 'bloc/viewBookingBloc.dart';
 import 'bloc/viewServicesBloc.dart';
 import 'bloc/viewSlotsBloc.dart';
@@ -46,10 +48,12 @@ class _AppHomeState extends State<AppHome> {
         BlocProvider<LogOutUserBloc>(create: (context) => LogOutUserBloc()),
         BlocProvider<RemoveServiceBloc>(create: (context) => RemoveServiceBloc()),
         BlocProvider<RemoveStaffBloc>(create: (context) => RemoveStaffBloc()),
+        BlocProvider<DeleteBookingBloc>(create: (context) => DeleteBookingBloc()),
         BlocProvider<ViewServicesBloc>(create: (context) => ViewServicesBloc()),
         BlocProvider<ViewSlotsBloc>(create: (context) => ViewSlotsBloc()),
         BlocProvider<BookingBloc>(create: (context) => BookingBloc()),
         BlocProvider<ViewBookingBloc>(create: (context) => ViewBookingBloc()),
+        BlocProvider<UserViewBookingBloc>(create: (context) => UserViewBookingBloc()),
         BlocProvider<ViewStaffBloc>(create: (context) => ViewStaffBloc()),
         BlocProvider<AddStaffBloc>(create: (context) => AddStaffBloc()),
         BlocProvider<AddServiceBloc>(create: (context) => AddServiceBloc()),
